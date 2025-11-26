@@ -1,9 +1,8 @@
-<!-- Adjusted layout/indentation for a more natural hand-written style while keeping all code intact -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Enji? Yes</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -37,16 +36,18 @@
       font-family: 'Poppins', sans-serif;
       text-decoration: none;
       list-style: none;
+      -webkit-tap-highlight-color: transparent; /* Hapus highlight biru di android */
     }
 
     html { scroll-behavior: smooth; }
 
+    /* Layout Desktop Default */
     body {
       background: var(--bg-main);
       color: var(--text-main);
       transition: var(--transition);
       min-height: 100vh;
-      display: flex;
+      display: flex; /* Flexbox untuk desktop */
       justify-content: center;
       padding: 20px;
     }
@@ -54,7 +55,7 @@
     .container {
       max-width: 1400px;
       width: 100%;
-      display: grid;
+      display: grid; /* Grid untuk desktop */
       grid-template-columns: 80px 350px 1fr;
       gap: 20px;
       align-items: start;
@@ -76,7 +77,7 @@
 
     .colored { color: var(--primary-color); }
 
-    /* Navbar */
+    /* Navbar Desktop */
     .navbar {
       position: sticky;
       top: 20px;
@@ -120,11 +121,7 @@
       transform: scale(1.1);
     }
 
-    .navbar .theme {
-      cursor: pointer;
-      color: var(--text-muted);
-    }
-
+    /* Profile Desktop */
     .profile {
       position: sticky;
       top: 20px;
@@ -152,11 +149,8 @@
       z-index: 2;
     }
 
-    .profile h2 {
-      margin-top: 10px;
-      font-size: 1.8rem;
-    }
-
+    .profile h2 { margin-top: 10px; font-size: 1.8rem; }
+    
     .profile .socials {
       margin: 25px 0;
       display: flex;
@@ -173,14 +167,7 @@
       transition: var(--transition);
     }
 
-    .profile .socials ion-icon:hover {
-      background: var(--primary-color);
-      color: #fff;
-      transform: translateY(-3px);
-    }
-
     .profile-footer table { width: 100%; }
-
     .profile-footer td a {
       padding: 10px;
       font-size: .9rem;
@@ -193,28 +180,11 @@
       transition: var(--transition);
     }
 
-    .profile-footer td a:hover {
-      background: rgba(255,255,255,0.05);
-      color: var(--primary-color);
-    }
-
-    .content {
-      padding: 40px;
-    }
-
-    .content section {
-      margin-bottom: 60px;
-    }
-
-    .content h2 {
-      font-size: 2.2rem;
-      margin-bottom: 10px;
-    }
-
-    .content p {
-      line-height: 1.7;
-      color: var(--text-muted);
-    }
+    /* Content Area */
+    .content { padding: 40px; }
+    .content section { margin-bottom: 60px; }
+    .content h2 { font-size: 2.2rem; margin-bottom: 10px; }
+    .content p { line-height: 1.7; color: var(--text-muted); }
 
     .stats-grid {
       margin-top: 30px;
@@ -222,7 +192,6 @@
       gap: 15px;
       grid-template-columns: repeat(3,1fr);
     }
-
     .stat-box {
       padding: 20px;
       text-align: center;
@@ -230,18 +199,13 @@
       background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.05);
     }
-
-    .stat-box h3 {
-      color: var(--primary-color);
-      font-size: 2rem;
-    }
+    .stat-box h3 { color: var(--primary-color); font-size: 2rem; }
 
     .skills-grid {
       display: grid;
       gap: 15px;
       grid-template-columns: repeat(auto-fit, minmax(100px,1fr));
     }
-
     .skill-card {
       padding: 20px;
       text-align: center;
@@ -250,112 +214,46 @@
       transition: var(--transition);
       border: 1px solid transparent;
     }
-
-    .skill-card:hover {
-      border-color: var(--primary-color);
-      transform: translateY(-5px);
-    }
-
-    .skill-card ion-icon {
-      font-size: 40px;
-      margin-bottom: 10px;
-      color: var(--primary-color);
-    }
+    .skill-card ion-icon { font-size: 40px; margin-bottom: 10px; color: var(--primary-color); }
 
     .gallery-grid {
       display: grid;
       gap: 20px;
       grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
     }
-
     .cert-card {
       display: block;
       border-radius: 15px;
       overflow: hidden;
       border: 1px solid rgba(255,255,255,0.05);
       background: rgba(255,255,255,0.03);
-      transition: var(--transition);
       position: relative;
     }
-
-    .cert-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--primary-color);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    }
-
     .cert-img-wrapper {
       width: 100%;
       height: 200px;
       background: #000;
       overflow: hidden;
-      position: relative;
     }
-
     .cert-img-wrapper img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: top;
-      transition: .5s ease;
-      opacity: .9;
     }
-
-    .cert-card:hover img {
-      opacity: 1;
-      transform: scale(1.1);
-    }
-
-    .cert-info {
-      padding: 20px;
-    }
-
-    .cert-info h4 {
-      margin-bottom: 5px;
-      font-weight: 600;
-      font-size: 1.1rem;
-      line-height: 1.4;
-      color: var(--text-main);
-    }
-
-    .cert-info p {
-      font-size: .85rem;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-weight: 500;
-      color: var(--primary-color);
-    }
+    .cert-info { padding: 20px; }
 
     .cards-grid {
       display: grid;
       gap: 20px;
       grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
     }
-
-    .card,
-    .resume-card {
+    .card, .resume-card {
       padding: 25px;
       border-radius: 15px;
       background: rgba(255,255,255,0.03);
       border-left: 3px solid var(--primary-color);
-      transition: var(--transition);
     }
-
-    .card:hover {
-      transform: translateX(5px);
-      background: rgba(255,255,255,0.05);
-    }
-
-    .card h3,
-    .resume-card h3 {
-      margin-bottom: 10px;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
     .resume-card .date {
       margin-bottom: 10px;
       color: var(--primary-color);
@@ -363,103 +261,112 @@
       font-weight: 600;
     }
 
-    .resume-image img {
-      width: 100%;
-      margin-top: 30px;
-      border-radius: 15px;
-      opacity: .8;
-    }
-
     /* Visitor Widget */
-    .visitor-widget {
-      position: relative;
-    }
-
+    .visitor-widget { position: relative; }
     .visitor-emoji {
       display: inline-block;
       font-size: 1.2rem;
       margin-left: 5px;
       transition: transform 0.4s ease;
     }
+    .visitor-bounce { transform: scale(1.5) rotate(15deg); }
 
-    .visitor-bounce {
-      transform: scale(1.5) rotate(15deg);
-    }
 
-    @media (max-width: 1024px) {
-      .container { grid-template-columns: 300px 1fr; }
-      .navbar { display: none; }
-    }
-
-    @media (max-width: 850px) {
-      .container {
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-        padding: 0;
+    /* =========================================
+       PERBAIKAN TOTAL UNTUK ANDROID / MOBILE
+       ========================================= */
+    @media (max-width: 900px) {
+      
+      /* 1. Reset Body agar tidak memaksa ke tengah */
+      body {
+        display: block !important; /* PENTING: Matikan Flex */
+        padding: 0 !important;
+        overflow-x: hidden;
+        width: 100%;
       }
 
+      /* 2. Reset Container agar lurus ke bawah */
+      .container {
+        display: block !important; /* PENTING: Matikan Grid */
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      /* 3. Navbar Pindah ke Bawah (Fixed) */
       .navbar {
-        position: fixed;
+        position: fixed !important;
         bottom: 0;
         left: 0;
+        right: 0;
         width: 100%;
-        padding: 0;
-        display: block;
+        height: 70px; /* Tinggi pasti */
         background: var(--bg-card);
         border-top: 1px solid rgba(255,255,255,0.1);
-        flex-direction: row;
-        z-index: 1000;
-      }
-
-      .navbar .box.nav {
-        width: 100%;
-        padding: 10px 0;
-        flex-direction: row;
+        display: flex !important;
+        flex-direction: row !important;
         justify-content: space-around;
-        background: transparent;
-        border-radius: 0;
+        align-items: center;
+        padding: 0 !important;
+        top: auto !important; /* Reset top */
+        z-index: 9999;
+        box-shadow: 0 -5px 15px rgba(0,0,0,0.5);
+      }
+
+      .navbar .box {
+        background: none;
         box-shadow: none;
+        padding: 0;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-around;
       }
 
-      .navbar .theme,
-      .navbar .item p {
-        display: none;
-      }
+      /* Sembunyikan teks di navbar HP */
+      .navbar .item p, .navbar .theme { display: none !important; }
+      
+      .navbar .item { margin: 0; }
+      .navbar ion-icon { font-size: 28px; margin: 0; }
 
-      .navbar ion-icon { margin-bottom: 0; }
-
-      .profile {
-        top: 0;
-        z-index: 1;
-        margin-bottom: 20px;
+      /* 4. Profile Card Normal (Scrollable) */
+      .box.profile {
+        position: relative !important; /* Jangan sticky */
+        top: 0 !important;
+        width: 100%;
         border-radius: 0 0 30px 30px;
+        margin-bottom: 20px;
+        z-index: 10;
       }
 
-      .content {
-        padding: 20px 20px 80px;
+      /* 5. Konten Utama */
+      .box.content {
+        width: 100%;
+        border-radius: 30px 30px 0 0;
+        padding: 30px 20px 100px 20px !important; /* Padding bawah besar agar tidak ketutup navbar */
+        margin-top: -30px; /* Efek numpuk dikit */
+        background: var(--bg-card);
       }
 
-      .stats-grid {
-        grid-template-columns: 1fr;
+      /* Rapikan elemen dalam */
+      .stats-grid, .gallery-grid, .cards-grid {
+        grid-template-columns: 1fr !important; /* Satu kolom ke bawah */
       }
+
+      .content h2 { font-size: 1.8rem; }
     }
+
   </style>
 </head>
 
 <body>
   <div class="container">
 
-    <!-- Navbar -->
     <nav class="navbar">
-      <div class="box theme" id="theme-toggle">
-        <div class="item">
+      <div class="box nav">
+        <div class="item" id="theme-toggle">
           <ion-icon name="partly-sunny-outline"></ion-icon>
         </div>
-      </div>
-
-      <div class="box nav">
-        <div class="item active">
+        <div class="item">
           <a href="#about"><ion-icon name="person-circle-outline"></ion-icon><p>about</p></a>
         </div>
         <div class="item">
@@ -477,7 +384,6 @@
       </div>
     </nav>
 
-    <!-- Profile -->
     <div class="box profile">
       <img src="https://files.catbox.moe/nfjghr.jpg" class="header" alt="Header" />
       <img src="https://files.catbox.moe/pcg4lo.png" class="img" alt="Enji" />
@@ -494,24 +400,17 @@
 
       <div class="profile-footer">
         <div class="divider rtl"></div>
-        <table>
-          <tr>
-            <td>
-              <a href="#contact">Contact Me <ion-icon name="call-outline"></ion-icon></a>
-            </td>
-          </tr>
-        </table>
+        <div style="text-align:center; padding:10px;">
+          <a href="#contact" style="color:var(--text-muted); font-size:0.9rem;">Contact Me <ion-icon name="call-outline"></ion-icon></a>
+        </div>
       </div>
     </div>
 
-    <!-- Content -->
     <div class="box content">
 
-      <!-- About -->
       <section id="about">
         <h2>Hey <span class="colored">there!</span></h2>
         <div class="divider ltr"></div>
-
         <p>
           Kenalin nama gw Enang atau kalo di virtual dipanggil Enji. Umur gw 18th. Dan gw seorang santri juga di Ponpes Jabal Toriq Tasikmalaya, ketertarikan gw di dunia coding itu kaya pengen banget bisa ngoding kan apalagi bikin website ini itu yang keren UI/UX nya, tapi ya gimana lagi gw masih belum bisa (pemula) kali aja ada yang mau ngasih saran/kritik sekedar ngasih informasi tentang coding atau mau berteman juga boleh. bisa klik logo wa/instagram gw hehehe.
         </p>
@@ -520,17 +419,15 @@
           <div class="stat-box"><h3>9+</h3><p>Sertifikat</p></div>
           <div class="stat-box visitor-widget">
             <h3 id="visitor-count">0+</h3>
-            <p>Pengunjung Portfolio</p>
+            <p>Pengunjung</p>
           </div>
-          <div class="stat-box"><h3>1</h3><p>Tahun Pengalaman</p></div>
+          <div class="stat-box"><h3>1</h3><p>Tahun Exp</p></div>
         </div>
       </section>
 
-      <!-- Skills -->
-      <section id="skills" class="skills-section">
+      <section id="skills">
         <h2>My <span class="colored">Skills</span></h2>
         <div class="divider ltr"></div>
-
         <div class="skills-grid">
           <div class="skill-card"><ion-icon name="logo-html5"></ion-icon><p>HTML5</p></div>
           <div class="skill-card"><ion-icon name="logo-css3"></ion-icon><p>CSS3</p></div>
@@ -538,159 +435,52 @@
         </div>
       </section>
 
-      <!-- Gallery -->
       <section id="gallery">
         <h2>My <span class="colored">Certificates</span></h2>
         <div class="divider ltr"></div>
-
-        <p style="font-size:.9em; margin-bottom:20px; color:var(--text-muted); text-align:center;">
-          (Klik gambar untuk melihat ukuran penuh)
-        </p>
-
-      <div class="gallery-grid">
-  <div class="cert-card">
-    <div class="cert-img-wrapper">
-      <a href="https://files.catbox.moe/swxq61.png" target="_blank">
-        <img src="https://files.catbox.moe/swxq61.png" alt="Certificate 1">
-      </a>
-    </div>
-    <div class="cert-info">
-      <h4>Certificate 1</h4>
-      <p>Click to preview</p>
-    </div>
-  </div>
-
-  <div class="cert-card">
-    <div class="cert-img-wrapper">
-      <a href="https://files.catbox.moe/7fz495.png" target="_blank">
-        <img src="https://files.catbox.moe/7fz495.png" alt="Certificate 2">
-      </a>
-    </div>
-    <div class="cert-info">
-      <h4>Certificate 2</h4>
-      <p>Click to preview</p>
-    </div>
-  </div>
-
-  <div class="cert-card">
-    <div class="cert-img-wrapper">
-      <a href="https://files.catbox.moe/lg5hdy.png" target="_blank">
-        <img src="https://files.catbox.moe/lg5hdy.png" alt="Certificate 3">
-      </a>
-    </div>
-    <div class="cert-info">
-      <h4>Certificate 3</h4>
-      <p>Click to preview</p>
-    </div>
-  </div>
-
-  <div class="cert-card">
-    <div class="cert-img-wrapper">
-      <a href="https://files.catbox.moe/0zu1p0.png" target="_blank">
-        <img src="https://files.catbox.moe/0zu1p0.png" alt="Certificate 4">
-      </a>
-    </div>
-    <div class="cert-info">
-      <h4>Certificate 4</h4>
-      <p>Click to preview</p>
-    </div>
-  </div>
-
-  <div class="cert-card">
-    <div class="cert-img-wrapper">
-      <a href="https://files.catbox.moe/ab1q8a.png" target="_blank">
-        <img src="https://files.catbox.moe/ab1q8a.png" alt="Certificate 5">
-      </a>
-    </div>
-    <div class="cert-info">
-      <h4>Certificate 5</h4>
-      <p>Click to preview</p>
-    </div>
-  </div>
-
-  <div class="cert-card">
-    <div class="cert-img-wrapper">
-      <a href="https://files.catbox.moe/53dglf.png" target="_blank">
-        <img src="https://files.catbox.moe/53dglf.png" alt="Certificate 6">
-      </a>
-    </div>
-    <div class="cert-info">
-      <h4>Certificate 6</h4>
-      <p>Click to preview</p>
-    </div>
-  </div>
-
-  <div class="cert-card">
-    <div class="cert-img-wrapper">
-      <a href="https://files.catbox.moe/vi0jhx.png" target="_blank">
-        <img src="https://files.catbox.moe/vi0jhx.png" alt="Certificate 7">
-      </a>
-    </div>
-    <div class="cert-info">
-      <h4>Certificate 7</h4>
-      <p>Click to preview</p>
-    </div>
-  </div>
-
-  <div class="cert-card">
-    <div class="cert-img-wrapper">
-      <a href="https://files.catbox.moe/xi1lpb.png" target="_blank">
-        <img src="https://files.catbox.moe/xi1lpb.png" alt="Certificate 8">
-      </a>
-    </div>
-    <div class="cert-info">
-      <h4>Certificate 8</h4>
-      <p>Click to preview</p>
-    </div>
-  </div>
-
-  <div class="cert-card">
-    <div class="cert-img-wrapper">
-      <a href="https://files.catbox.moe/bztbdo.png" target="_blank">
-        <img src="https://files.catbox.moe/bztbdo.png" alt="Certificate 9">
-      </a>
-    </div>
-    <div class="cert-info">
-      <h4>Certificate 9</h4>
-      <p>Click to preview</p>
-    </div>
-  </div>
-</div>
-
-
+        <p style="font-size:.8rem; color:var(--text-muted); text-align:center; margin-bottom:15px;">(Tap gambar untuk melihat)</p>
+        
+        <div class="gallery-grid">
+          <div class="cert-card">
+            <div class="cert-img-wrapper"><a href="https://files.catbox.moe/swxq61.png"><img src="https://files.catbox.moe/swxq61.png"></a></div>
+            <div class="cert-info"><h4>Certificate 1</h4></div>
+          </div>
+          <div class="cert-card">
+            <div class="cert-img-wrapper"><a href="https://files.catbox.moe/7fz495.png"><img src="https://files.catbox.moe/7fz495.png"></a></div>
+            <div class="cert-info"><h4>Certificate 2</h4></div>
+          </div>
+           <div class="cert-card">
+            <div class="cert-img-wrapper"><a href="https://files.catbox.moe/lg5hdy.png"><img src="https://files.catbox.moe/lg5hdy.png"></a></div>
+            <div class="cert-info"><h4>Certificate 3</h4></div>
+          </div>
+          </div>
       </section>
 
-      <!-- Experience -->
-      <section id="experience" class="experience-section">
+      <section id="experience">
         <h2>My <span class="colored">Experience</span></h2>
         <div class="divider ltr"></div>
-
         <div class="cards-grid">
           <div class="card">
-            <h3><ion-icon name="laptop-outline"></ion-icon> Web Development</h3>
-            <p>Membuat website portofolio dan landing page sederhana menggunakan HTML, CSS, dan Javascript.</p>
+            <h3><ion-icon name="laptop-outline"></ion-icon> Web Dev</h3>
+            <p>Membuat website portofolio dan landing page sederhana.</p>
           </div>
-
           <div class="card">
             <h3><ion-icon name="school-outline"></ion-icon> Self Learning</h3>
-            <p>Aktif mengikuti kursus online di Dicoding, Coursera, dan Rakamin Academy untuk meningkatkan skill coding.</p>
+            <p>Aktif mengikuti kursus online di Dicoding & Coursera.</p>
           </div>
         </div>
       </section>
 
-      <!-- Education -->
-      <section id="resume" class="education-section">
+      <section id="resume">
         <h2>My <span class="colored">Education</span></h2>
         <div class="divider ltr"></div>
-
         <div class="resume-card">
-          <h3>Ponpes Jabal Toriq, Tasikmalaya</h3>
+          <h3>Ponpes Jabal Toriq</h3>
           <p class="date">2020 - Sekarang</p>
-          <p>Mendalami ilmu agama sekaligus mengembangkan potensi di bidang teknologi digital.</p>
+          <p>Tasikmalaya</p>
         </div>
       </section>
 
-      <!-- Contact / Footer -->
       <section id="contact">
         <div class="divider ltr"></div>
         <p style="text-align:center; font-size:.9em; opacity:.7;">&copy; 2025 Enji</p>
@@ -700,6 +490,7 @@
   </div>
 
   <script>
+    // Script Theme & Scroll
     const themeBtn = document.getElementById('theme-toggle');
     const body = document.body;
     const icon = themeBtn.querySelector('ion-icon');
@@ -712,7 +503,6 @@
 
     themeBtn.addEventListener('click', () => {
       body.classList.toggle('light');
-
       if (body.classList.contains('light')) {
         icon.setAttribute('name','moon-outline');
         localStorage.setItem('theme','light');
@@ -722,37 +512,12 @@
       }
     });
 
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', e => {
-        e.preventDefault();
-        document.querySelector(anchor.getAttribute('href')).scrollIntoView({ behavior:'smooth' });
-      });
-    });
-
-    // Visitor count
+    // Visitor Counter Sederhana
     const visitorCountEl = document.getElementById('visitor-count');
-
-    // Tambahkan emoji lucu
-    const visitorEmoji = document.createElement('span');
-    visitorEmoji.classList.add('visitor-emoji');
-    visitorEmoji.innerText = '👀';
-    visitorCountEl.parentNode.querySelector('p').appendChild(visitorEmoji);
-
-    let visitorCount = localStorage.getItem('visitorCount');
-    visitorCount = visitorCount ? parseInt(visitorCount) : 0;
+    let visitorCount = localStorage.getItem('visitorCount') || 0;
     visitorCount++;
     localStorage.setItem('visitorCount', visitorCount);
-    visitorCountEl.innerText = visitorCount;
-
-    visitorCountEl.style.transition = "transform 0.4s ease";
-    visitorCountEl.style.display = "inline-block";
-    visitorCountEl.style.transform = "scale(1.3)";
-
-    visitorEmoji.classList.add('visitor-bounce');
-    setTimeout(() => {
-      visitorCountEl.style.transform = "scale(1)";
-      visitorEmoji.classList.remove('visitor-bounce');
-    }, 400);
+    visitorCountEl.innerText = visitorCount + "+";
   </script>
 </body>
 </html>
