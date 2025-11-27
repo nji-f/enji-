@@ -36,18 +36,18 @@
       font-family: 'Poppins', sans-serif;
       text-decoration: none;
       list-style: none;
-      -webkit-tap-highlight-color: transparent; /* Hapus highlight biru di android */
+      -webkit-tap-highlight-color: transparent; 
     }
 
     html { scroll-behavior: smooth; }
 
-    /* Layout Desktop Default */
+    
     body {
       background: var(--bg-main);
       color: var(--text-main);
       transition: var(--transition);
       min-height: 100vh;
-      display: flex; /* Flexbox untuk desktop */
+      display: flex;
       justify-content: center;
       padding: 20px;
     }
@@ -55,7 +55,7 @@
     .container {
       max-width: 1400px;
       width: 100%;
-      display: grid; /* Grid untuk desktop */
+      display: grid; 
       grid-template-columns: 80px 350px 1fr;
       gap: 20px;
       align-items: start;
@@ -272,35 +272,32 @@
     .visitor-bounce { transform: scale(1.5) rotate(15deg); }
 
 
-    /* =========================================
-       PERBAIKAN TOTAL UNTUK ANDROID / MOBILE
-       ========================================= */
+  
     @media (max-width: 900px) {
-      
-      /* 1. Reset Body agar tidak memaksa ke tengah */
+  
       body {
-        display: block !important; /* PENTING: Matikan Flex */
+        display: block !important; 
         padding: 0 !important;
         overflow-x: hidden;
         width: 100%;
       }
 
-      /* 2. Reset Container agar lurus ke bawah */
+    
       .container {
-        display: block !important; /* PENTING: Matikan Grid */
+        display: block !important;
         width: 100% !important;
         padding: 0 !important;
         margin: 0 !important;
       }
 
-      /* 3. Navbar Pindah ke Bawah (Fixed) */
+    
       .navbar {
         position: fixed !important;
         bottom: 0;
         left: 0;
         right: 0;
         width: 100%;
-        height: 70px; /* Tinggi pasti */
+        height: 70px; 
         background: var(--bg-card);
         border-top: 1px solid rgba(255,255,255,0.1);
         display: flex !important;
@@ -308,7 +305,7 @@
         justify-content: space-around;
         align-items: center;
         padding: 0 !important;
-        top: auto !important; /* Reset top */
+        top: auto !important; 
         z-index: 9999;
         box-shadow: 0 -5px 15px rgba(0,0,0,0.5);
       }
@@ -322,15 +319,15 @@
         justify-content: space-around;
       }
 
-      /* Sembunyikan teks di navbar HP */
+    
       .navbar .item p, .navbar .theme { display: none !important; }
       
       .navbar .item { margin: 0; }
       .navbar ion-icon { font-size: 28px; margin: 0; }
 
-      /* 4. Profile Card Normal (Scrollable) */
+    
       .box.profile {
-        position: relative !important; /* Jangan sticky */
+        position: relative !important; 
         top: 0 !important;
         width: 100%;
         border-radius: 0 0 30px 30px;
@@ -338,18 +335,18 @@
         z-index: 10;
       }
 
-      /* 5. Konten Utama */
+      
       .box.content {
         width: 100%;
         border-radius: 30px 30px 0 0;
-        padding: 30px 20px 100px 20px !important; /* Padding bawah besar agar tidak ketutup navbar */
-        margin-top: -30px; /* Efek numpuk dikit */
+        padding: 30px 20px 100px 20px !important;
+        margin-top: -30px; 
         background: var(--bg-card);
       }
 
-      /* Rapikan elemen dalam */
+      
       .stats-grid, .gallery-grid, .cards-grid {
-        grid-template-columns: 1fr !important; /* Satu kolom ke bawah */
+        grid-template-columns: 1fr !important; 
       }
 
       .content h2 { font-size: 1.8rem; }
@@ -379,7 +376,7 @@
           <a href="#experience"><ion-icon name="briefcase-outline"></ion-icon><p>exp</p></a>
         </div>
         <div class="item">
-          <a href="#contact"><ion-icon name="paper-plane-outline"></ion-icon><p>contact</p></a>
+          <a href="#about"><ion-icon name="paper-plane-outline"></ion-icon><p>contact</p></a>
         </div>
       </div>
     </nav>
@@ -401,7 +398,7 @@
       <div class="profile-footer">
         <div class="divider rtl"></div>
         <div style="text-align:center; padding:10px;">
-          <a href="#contact" style="color:var(--text-muted); font-size:0.9rem;">Contact Me <ion-icon name="call-outline"></ion-icon></a>
+          <a href="#about" style="color:var(--text-muted); font-size:0.9rem;">Contact Me <ion-icon name="call-outline"></ion-icon></a>
         </div>
       </div>
     </div>
@@ -417,10 +414,7 @@
 
         <div class="stats-grid">
           <div class="stat-box"><h3>9+</h3><p>Sertifikat</p></div>
-          <div class="stat-box visitor-widget">
-            <h3 id="visitor-count">0+</h3>
-            <p>Pengunjung</p>
-          </div>
+          <div class="stat-box"><h3>1</h3><p>project</p></div>
           <div class="stat-box"><h3>1</h3><p>tahun pengalaman</p></div>
         </div>
       </section>
@@ -446,11 +440,11 @@
             <div class="cert-info"><h4>Certificate 1</h4></div>
           </div>
           <div class="cert-card">
-            <div class="cert-img-wrapper"><a href="https://files.catbox.moe/7fz495.png"><img src="https://files.catbox.moe/7fz495.png"></a></div>
+            <div class="cert-img-wrapper"><a href="https://files.catbox.moe/ab1q8a.png"><img src="https://files.catbox.moe/7fz495.png"></a></div>
             <div class="cert-info"><h4>Certificate 2</h4></div>
           </div>
            <div class="cert-card">
-            <div class="cert-img-wrapper"><a href="https://files.catbox.moe/lg5hdy.png"><img src="https://files.catbox.moe/lg5hdy.png"></a></div>
+            <div class="cert-img-wrapper"><a href="https://files.catbox.moe/53dglf.png"><img src="https://files.catbox.moe/lg5hdy.png"></a></div>
             <div class="cert-info"><h4>Certificate 3</h4></div>
           </div>
           </div>
@@ -512,12 +506,8 @@
       }
     });
 
-    // Visitor Counter Sederhana
-    const visitorCountEl = document.getElementById('visitor-count');
-    let visitorCount = localStorage.getItem('visitorCount') || 0;
-    visitorCount++;
-    localStorage.setItem('visitorCount', visitorCount);
-    visitorCountEl.innerText = visitorCount + "+";
+    alert("hallo selamat datang");
+    });
   </script>
 </body>
 </html>
