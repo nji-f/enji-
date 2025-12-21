@@ -1,583 +1,370 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Enji? Yes</title>
-  <link rel="icon" href="https://files.catbox.moe/y4ejg2.jpeg">
-  <script defer src="https://cloud.umami.is/script.js" data-website-id="7c10b168-169b-4105-8a7a-10f062612f1a"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enji - Loading Screen with Animations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <style>
-    :root {
-      --bg-main: #0f141a;
-      --bg-card: #1b232c;
-      --primary-color: #4fc6ce;
-      --text-main: #e5e5e5;
-      --text-muted: #98b1ba;
-      --border-radius: 20px;
-      --transition: all 0.3s ease;
-      --shadow: 0 4px 20px rgba(0,0,0,0.3);
-    }
-    body.light {
-      --bg-main: #d5f3f9;
-      --bg-card: #fff;
-      --primary-color: #225b60;
-      --text-main: #1d3a41;
-      --text-muted: #557a82;
-    }
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-      text-decoration: none;
-      list-style: none;
-      -webkit-tap-highlight-color: transparent;
-    }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg-main);
-      color: var(--text-main);
-      transition: var(--transition);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      padding: 20px;
-    }
-    .container {
-      max-width: 1400px;
-      width: 100%;
-      display: grid;
-      grid-template-columns: 80px 350px 1fr;
-      gap: 20px;
-      align-items: start;
-    }
-    .box {
-      background: var(--bg-card);
-      border-radius: 25px;
-      box-shadow: var(--shadow);
-      transition: var(--transition);
-    }
-    .divider {
-      width: 100%;
-      height: 2px;
-      margin: 20px 0;
-      background: radial-gradient(ellipse at center, var(--text-muted) 0%, transparent 70%);
-    }
-    .colored { color: var(--primary-color); }
-    
-    /* Navbar Desktop */
-    .navbar {
-      position: sticky;
-      top: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      z-index: 100;
-    }
-    .navbar .box {
-      padding: 20px 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .navbar .item {
-      margin: 15px 0;
-      text-align: center;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-    .navbar .item a {
-      color: var(--text-muted);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-size: .8rem;
-      text-transform: uppercase;
-    }
-    .navbar ion-icon {
-      font-size: 28px;
-      margin-bottom: 5px;
-    }
-    .navbar .item:hover a,
-    .navbar .item:hover ion-icon {
-      color: var(--primary-color);
-      transform: scale(1.1);
-    }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
 
-    /* Profile Desktop */
-    .profile {
-      position: sticky;
-      top: 20px;
-      text-align: center;
-      padding-bottom: 20px;
-    }
-    .profile .header {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      border-radius: 25px 25px 0 0;
-      clip-path: polygon(100% 0,100% 80%,80% 100%,20% 100%,0 80%,0 0);
-    }
-    .profile .img {
-      width: 140px;
-      height: 140px;
-      border: 8px solid var(--bg-card);
-      border-radius: 40px;
-      background: var(--bg-card);
-      object-fit: cover;
-      position: relative;
-      margin: -75px auto 0;
-      z-index: 2;
-    }
-    .profile h2 { margin-top: 10px; font-size: 1.8rem; }
-    .profile .socials {
-      margin: 25px 0;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-    }
-    .profile .socials ion-icon {
-      padding: 10px;
-      font-size: 24px;
-      background: rgba(255,255,255,0.05);
-      border-radius: 12px;
-      color: var(--text-muted);
-      transition: var(--transition);
-    }
-    .profile-footer table { width: 100%; }
-    .profile-footer td a {
-      padding: 10px;
-      font-size: .9rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 5px;
-      border-radius: 10px;
-      color: var(--text-muted);
-      transition: var(--transition);
-    }
+        /* Loading Screen Styles */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.8s ease-out;
+        }
 
-    /* Content Area */
-    .content { padding: 40px; }
-    .content section { margin-bottom: 60px; }
-    .content h2 { font-size: 2.2rem; margin-bottom: 10px; }
-    .content p { line-height: 1.7; color: var(--text-muted); }
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
 
-    .stats-grid {
-      margin-top: 30px;
-      display: grid;
-      gap: 15px;
-      grid-template-columns: repeat(3,1fr);
-    }
-    .stat-box {
-      padding: 20px;
-      text-align: center;
-      border-radius: 15px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.05);
-    }
-    .stat-box h3 { color: var(--primary-color); font-size: 2rem; }
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
 
-    .skills-grid {
-      display: grid;
-      gap: 15px;
-      grid-template-columns: repeat(auto-fit, minmax(100px,1fr));
-    }
-    .skill-card {
-      padding: 20px;
-      text-align: center;
-      border-radius: 15px;
-      background: rgba(255,255,255,0.03);
-      transition: var(--transition);
-      border: 1px solid transparent;
-    }
-    .skill-card ion-icon { font-size: 40px; margin-bottom: 10px; color: var(--primary-color); }
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #ffffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
 
-    .gallery-grid {
-      display: grid;
-      gap: 20px;
-      grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
-    }
-    .cert-card {
-      display: block;
-      border-radius: 15px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.05);
-      background: rgba(255,255,255,0.03);
-      position: relative;
-    }
-    .cert-img-wrapper {
-      width: 100%;
-      height: 200px;
-      background: #000;
-      overflow: hidden;
-    }
-    .cert-img-wrapper img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: top;
-    }
-    .cert-info { padding: 20px; }
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
 
-    .cards-grid {
-      display: grid;
-      gap: 20px;
-      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-    }
-    .card, .resume-card {
-      padding: 25px;
-      border-radius: 15px;
-      background: rgba(255,255,255,0.03);
-      border-left: 3px solid var(--primary-color);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .resume-card .date {
-      margin-bottom: 10px;
-      color: var(--primary-color);
-      font-size: .85rem;
-      font-weight: 600;
-    }
+        .loading-text {
+            font-size: 24px;
+            font-weight: 600;
+            color: #ffffff;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
 
-    /* Projects Style */
-    .project-card h3 { margin-bottom: 10px; }
-    .project-card p { font-size: 0.9rem; margin-bottom: 15px; }
-    .tech-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; }
-    .tech-tags span {
-      font-size: 0.75rem;
-      background: rgba(79, 198, 206, 0.1);
-      color: var(--primary-color);
-      padding: 4px 10px;
-      border-radius: 20px;
-    }
-    .project-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      color: var(--text-main);
-      font-size: 0.9rem;
-      transition: var(--transition);
-      margin-top: auto;
-    }
-    .project-link:hover { color: var(--primary-color); }
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
 
-    /* Contact Form Style */
-    .contact-form {
-      background: rgba(255,255,255,0.03);
-      padding: 25px;
-      border-radius: 20px;
-      border: 1px solid rgba(255,255,255,0.05);
-    }
-    .form-group { margin-bottom: 15px; }
-    .form-group input, .form-group textarea {
-      width: 100%;
-      padding: 15px;
-      border-radius: 10px;
-      background: var(--bg-main);
-      border: 1px solid rgba(255,255,255,0.1);
-      color: var(--text-main);
-      font-family: 'Poppins', sans-serif;
-      outline: none;
-      transition: var(--transition);
-    }
-    .form-group input:focus, .form-group textarea:focus {
-      border-color: var(--primary-color);
-      box-shadow: 0 0 5px rgba(79, 198, 206, 0.3);
-    }
-    .btn-submit {
-      width: 100%;
-      padding: 15px;
-      background: var(--primary-color);
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      transition: var(--transition);
-    }
-    .btn-submit:hover { opacity: 0.9; transform: translateY(-2px); }
+        .loading-dots {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
 
-    /* Media Queries */
-    @media (max-width: 900px) {
-      body {
-        display: block !important;
-        padding: 0 !important;
-        overflow-x: hidden;
-        width: 100%;
-      }
-      .container {
-        display: block !important;
-        width: 100% !important;
-        padding: 0 !important;
-        margin: 0 !important;
-      }
-      .navbar {
-        position: fixed !important;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        height: 70px;
-        background: var(--bg-card);
-        border-top: 1px solid rgba(255,255,255,0.1);
-        display: flex !important;
-        flex-direction: row !important;
-        justify-content: space-around;
-        align-items: center;
-        padding: 0 !important;
-        top: auto !important;
-        z-index: 9999;
-        box-shadow: 0 -5px 15px rgba(0,0,0,0.5);
-      }
-      .navbar .box {
-        background: none;
-        box-shadow: none;
-        padding: 0;
-        flex-direction: row;
-        width: 100%;
-        justify-content: space-around;
-      }
-      .navbar .item p, .navbar .theme { display: none !important; }
-      .navbar .item { margin: 0; }
-      .navbar ion-icon { font-size: 24px; margin: 0; }
+        .dot {
+            width: 8px;
+            height: 8px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            animation: bounce 1.4s ease-in-out infinite;
+        }
 
-      .box.profile {
-        position: relative !important;
-        top: 0 !important;
-        width: 100%;
-        border-radius: 0 0 30px 30px;
-        margin-bottom: 20px;
-        z-index: 10;
-      }
-      .box.content {
-        width: 100%;
-        border-radius: 30px 30px 0 0;
-        padding: 30px 20px 100px 20px !important;
-        margin-top: -30px;
-        background: var(--bg-card);
-      }
-      .stats-grid, .gallery-grid, .cards-grid {
-        grid-template-columns: 1fr !important;
-      }
-      .content h2 { font-size: 1.8rem; }
-    }
-  </style>
+        .dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-15px);
+                opacity: 0.7;
+            }
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .main-content.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 60px 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .header {
+            animation: slideInDown 0.8s ease-out;
+        }
+
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .header h1 {
+            font-size: 48px;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .content {
+            animation: fadeIn 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .content p {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+            animation: slideInUp 0.8s ease-out 0.3s both;
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .feature {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            color: white;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .feature h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            cursor: pointer;
+            animation: slideInUp 0.8s ease-out 0.4s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .cta-button:active {
+            transform: translateY(-1px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 25px;
+            }
+
+            .header h1 {
+                font-size: 36px;
+            }
+
+            .header p {
+                font-size: 16px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
-
 <body>
-  <div class="container">
-    
-    <nav class="navbar">
-      <div class="box nav">
-        <div class="item" id="theme-toggle">
-          <ion-icon name="partly-sunny-outline"></ion-icon>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-container">
+            <div class="spinner"></div>
+            <div class="loading-text">Loading</div>
+            <div class="loading-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
         </div>
-        <div class="item">
-          <a href="#about"><ion-icon name="person-circle-outline"></ion-icon><p>about</p></a>
-        </div>
-        <div class="item">
-          <a href="#skills"><ion-icon name="layers-outline"></ion-icon><p>skills</p></a>
-        </div>
-        <div class="item">
-          <a href="#projects"><ion-icon name="code-slash-outline"></ion-icon><p>proj</p></a>
-        </div>
-        <div class="item">
-          <a href="#gallery"><ion-icon name="ribbon-outline"></ion-icon><p>certs</p></a>
-        </div>
-        <div class="item">
-          <a href="#experience"><ion-icon name="briefcase-outline"></ion-icon><p>exp</p></a>
-        </div>
-        <div class="item">
-          <a href="#contact"><ion-icon name="paper-plane-outline"></ion-icon><p>contact</p></a>
-        </div>
-      </div>
-    </nav>
-
-    <div class="box profile">
-      <img src="https://files.catbox.moe/nfjghr.jpg" class="header" alt="Header" />
-      <img src="https://files.catbox.moe/pcg4lo.png" class="img" alt="Enji" />
-      <h2>Enji</h2>
-      <p class="colored">@fpeople_0</p>
-      <ul class="socials">
-        <li><a href="https://github.com/nji-f" target="_blank" rel="noopener noreferrer"><ion-icon name="logo-github"></ion-icon></a></li>
-        <li><a href="https://wa.me/6283199503146" target="_blank" rel="noopener noreferrer"><ion-icon name="logo-whatsapp"></ion-icon></a></li>
-        <li><a href="https://www.instagram.com/fpeople_0/" target="_blank" rel="noopener noreferrer"><ion-icon name="logo-instagram"></ion-icon></a></li>
-        <li><a href="https://www.linkedin.com/in/enji-second2-8797b9388/" target="_blank" rel="noopener noreferrer"><ion-icon name="logo-linkedin"></ion-icon></a></li>
-      </ul>
-      <div class="profile-footer">
-        <div class="divider rtl"></div>
-        <div style="text-align:center; padding:10px;">
-          <a href="#contact" style="color:var(--text-muted); font-size:0.9rem;">Contact Me <ion-icon name="call-outline"></ion-icon></a>
-        </div>
-      </div>
     </div>
 
-    <div class="box content">
-      
-      <section id="about">
-        <h2>Hey <span class="colored">there!</span></h2>
-        <div class="divider ltr"></div>
-        <p>
-          Kenalin nama gw Enang atau kalo di virtual dipanggil Enji. Umur gw 18th. Dan gw seorang santri juga di Ponpes Jabal Toriq Tasikmalaya, ketertarikan gw di dunia coding itu kaya pengen banget [...]
-        </p>
-        <div class="stats-grid">
-          <div class="stat-box"><h3>9+</h3><p>Sertifikat</p></div>
-          <div class="stat-box"><h3>1</h3><p>project</p></div>
-          <div class="stat-box"><h3>1</h3><p>tahun pengalaman</p></div>
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <div class="container">
+            <div class="header">
+                <h1>Welcome to Enji</h1>
+                <p>Your Ultimate Platform for Success</p>
+            </div>
+
+            <div class="content">
+                <p>Experience the power of seamless integration, intuitive design, and cutting-edge technology all in one place.</p>
+
+                <div class="features">
+                    <div class="feature">
+                        <h3>⚡ Lightning Fast</h3>
+                        <p>Experience blazing fast performance and responsiveness</p>
+                    </div>
+                    <div class="feature">
+                        <h3>🔒 Secure</h3>
+                        <p>Your data is protected with enterprise-grade security</p>
+                    </div>
+                    <div class="feature">
+                        <h3>📱 Responsive</h3>
+                        <p>Works perfectly on all devices and screen sizes</p>
+                    </div>
+                </div>
+
+                <p>Join thousands of satisfied users and transform the way you work today.</p>
+            </div>
+
+            <button class="cta-button" onclick="handleButtonClick()">Get Started Now</button>
         </div>
-      </section>
-
-      <section id="skills">
-        <h2>My <span class="colored">Skills</span></h2>
-        <div class="divider ltr"></div>
-        <div class="skills-grid">
-          <div class="skill-card"><ion-icon name="logo-html5"></ion-icon><p>HTML5</p></div>
-          <div class="skill-card"><ion-icon name="logo-css3"></ion-icon><p>CSS3</p></div>
-          <div class="skill-card"><ion-icon name="logo-javascript"></ion-icon><p>JavaScript</p></div>
-        </div>
-      </section>
-
-      <section id="projects">
-        <h2>My <span class="colored">Projects</span></h2>
-        <div class="divider ltr"></div>
-        <div class="cards-grid">
-          <div class="card project-card">
-            <h3>Digital clock</h3>
-            <p>Website digital clock sederhana.</p>
-            <div class="tech-tags">
-              <span>HTML</span><span>CSS</span><span>JavaScript</span>
-            </div>
-            <a href="https://github.com/nji-f/digital-clock" class="project-link" target="_blank" rel="noopener noreferrer">Lihat Code <ion-icon name="arrow-forward-outline"></ion-icon></a>
-          </div>
-
-          <div class="card project-card">
-            <h3>Downloader Video</h3>
-            <p>Website Downloader tiktok,ig,X dll</p>
-            <div class="tech-tags">
-              <span>PHP</span><span>javascript</span>
-            </div>
-        
-            <a href="https://github.com/nji-f/DownloaderHub" class="project-link" target="_blank" rel="noopener noreferrer">Lihat Code <ion-icon name="arrow-forward-outline"></ion-icon></a>
-          </div>
-        </div>
-      </section>
-
-      <section id="gallery">
-        <h2>My <span class="colored">Certificates</span></h2>
-        <div class="divider ltr"></div>
-        <p style="font-size:.8rem; color:var(--text-muted); text-align:center; margin-bottom:15px;">(Tap gambar untuk melihat)</p>        
-        <div class="gallery-grid">
-          <div class="cert-card">
-            <div class="cert-img-wrapper"><a href="https://files.catbox.moe/swxq61.png" target="_blank" rel="noopener noreferrer"><img src="https://files.catbox.moe/swxq61.png" alt="Certificate 1"></a></div>
-            <div class="cert-info"><h4>Certificate 1</h4></div>
-          </div>
-          <div class="cert-card">
-            <div class="cert-img-wrapper"><a href="https://files.catbox.moe/ab1q8a.png" target="_blank" rel="noopener noreferrer"><img src="https://files.catbox.moe/ab1q8a.png" alt="Certificate 2"></a></div>
-            <div class="cert-info"><h4>Certificate 2</h4></div>
-          </div>
-           <div class="cert-card">
-            <div class="cert-img-wrapper"><a href="https://files.catbox.moe/53dglf.png" target="_blank" rel="noopener noreferrer"><img src="https://files.catbox.moe/53dglf.png" alt="Certificate 3"></a></div>
-            <div class="cert-info"><h4>Certificate 3</h4></div>
-          </div>
-        </div>
-      </section>
-
-      <section id="experience">
-        <h2>My <span class="colored">Experience</span></h2>
-        <div class="divider ltr"></div>
-        <div class="cards-grid">
-          <div class="card">
-            <div>
-              <h3><ion-icon name="laptop-outline"></ion-icon> Web Dev</h3>
-              <p>Membuat website portofolio dan landing page sederhana.</p>
-            </div>
-          </div>
-          <div class="card">
-            <div>
-              <h3><ion-icon name="school-outline"></ion-icon> Self Learning</h3>
-              <p>Aktif mengikuti kursus online di Dicoding & Coursera.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="resume">
-        <h2>My <span class="colored">Education</span></h2>
-        <div class="divider ltr"></div>
-        <div class="resume-card">
-          <h3>Ponpes Jabal Toriq</h3>
-          <p class="date">2020 - Sekarang</p>
-          <p>Tasikmalaya</p>
-        </div>
-      </section>
-
-      <section id="contact">
-        <h2>Contact <span class="colored">Me</span></h2>
-        <div class="divider ltr"></div>
-        
-        <div class="contact-form">
-          <form action="https://api.web3forms.com/submit" method="POST">
-            
-            <input type="hidden" name="access_key" value="dc617b63-60c2-4d58-9cdf-6bde947860ae">
-            
-            <input type="hidden" name="subject" value="Pesan Baru dari Portfolio Enji">
-            
-            <div class="form-group">
-              <input type="text" name="name" placeholder="Nama Kamu" required>
-            </div>
-            <div class="form-group">
-              <input type="email" name="email" placeholder="Email Kamu" required>
-            </div>
-            <div class="form-group">
-              <textarea name="message" rows="5" placeholder="Tulis pesan disini..." required></textarea>
-            </div>
-            
-            <button type="submit" class="btn-submit">
-              Kirim Pesan <ion-icon name="paper-plane"></ion-icon>
-            </button>
-          </form>
-          </div>
-
-        <p style="text-align:center; font-size:.9em; opacity:.7; margin-top:30px;">&copy; 2025 Enji</p>
-      </section>
-
     </div>
-  </div>
 
-  <script>
-    const themeBtn = document.getElementById('theme-toggle');
-    const body = document.body;
-    const icon = themeBtn.querySelector('ion-icon');
+    <script>
+        // Simulate loading for 3 seconds, then show content with animations
+        window.addEventListener('load', function() {
+            // Set a minimum loading time for the animation
+            const minimumLoadingTime = 3000; // 3 seconds
+            const startTime = Date.now();
 
-    const currentTheme = localStorage.getItem('theme');
-    if (currentTheme) {
-      body.classList.add(currentTheme);
-      if (currentTheme === 'light') icon.setAttribute('name','moon-outline');
-    }
+            function showContent() {
+                const loadingScreen = document.getElementById('loadingScreen');
+                const mainContent = document.getElementById('mainContent');
 
-    themeBtn.addEventListener('click', () => {
-      body.classList.toggle('light');
-      if (body.classList.contains('light')) {
-        icon.setAttribute('name','moon-outline');
-        localStorage.setItem('theme','light');
-      } else {
-        icon.setAttribute('name','partly-sunny-outline');
-        localStorage.removeItem('theme');
-      }
-    });
+                // Hide loading screen with fade-out
+                loadingScreen.classList.add('hidden');
 
-    // alert removed to avoid blocking the UI on load
-  </script>
+                // Show main content with animations
+                setTimeout(() => {
+                    mainContent.classList.add('visible');
+                }, 50);
+            }
+
+            // Calculate remaining time
+            const elapsedTime = Date.now() - startTime;
+            const remainingTime = Math.max(0, minimumLoadingTime - elapsedTime);
+
+            // Show content after minimum loading time
+            setTimeout(showContent, remainingTime);
+        });
+
+        // Handle button click
+        function handleButtonClick() {
+            alert('Welcome to Enji! This is your starting point for amazing things.');
+        }
+
+        // Optional: Show content immediately if needed (uncomment for testing)
+        // setTimeout(() => {
+        //     const loadingScreen = document.getElementById('loadingScreen');
+        //     const mainContent = document.getElementById('mainContent');
+        //     loadingScreen.classList.add('hidden');
+        //     setTimeout(() => {
+        //         mainContent.classList.add('visible');
+        //     }, 50);
+        // }, 3000);
+    </script>
 </body>
 </html>
