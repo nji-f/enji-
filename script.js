@@ -3,20 +3,22 @@ const tabContents = document.querySelectorAll('.tab-content');
 
 navButtons.forEach(btn => {
   btn.addEventListener('click', () => {
+    if(btn.classList.contains('active')) return;
+
+    const targetId = btn.getAttribute('data-target');
+    
+    // Update Nav
     navButtons.forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     
-    const targetId = btn.getAttribute('data-target');
-    
+    // Switch Content
     tabContents.forEach(content => {
       content.classList.remove('active');
+      if(content.id === targetId) {
+        content.classList.add('active');
+      }
     });
 
-    const targetContent = document.getElementById(targetId);
-    setTimeout(() => {
-      targetContent.classList.add('active');
-    }, 50);
-    
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 });
