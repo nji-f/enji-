@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Enji | Tabbed Portfolio</title>
+  <title>portfolio //enji</title>
   <link rel="icon" href="https://files.catbox.moe/y4ejg2.jpeg">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
-  
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<nav class="floating-nav">
+  <div class="bg-glow"></div>
+
+  <nav class="floating-nav">
     <button class="nav-btn active" data-target="home">Home</button>
     <button class="nav-btn" data-target="works">Works</button>
     <button class="nav-btn" data-target="stack">Stack</button>
@@ -21,25 +22,30 @@
   <div class="container">
     
     <div id="home" class="tab-content active">
-      <h1 class="page-title">ENJI.<br><span>Bukan dev</span></h1>
+      <h1 class="page-title">ENJI.<br><span>Bukan dev.</span></h1>
       <div class="bento">
-        <div class="card span-2">
+        <div class="card span-2 glass">
           <p class="tag">01 / Intro</p>
           <h2>Menulis Kode, Merapikan Logika.</h2>
-          <p style="color: var(--text-dim); line-height: 1.6;">
-            Halo, saya Enang atau Enji (di dunia virtual). Aku lahir di Pemalang pada tanggal 22-03-2007 jika sekarang (2026) berarti sudah 19 tahun. Aku seorang santri sekaligus siswa SMK Jabal Toriq Boarding School, disana aku menjalani kehidupan seperti santri pada umum nya (ga cium" kaki kyai/hal buruk tentang santri di medsos ye anti disini mah, religius boleh goblok jangan). Aku sekarang tinggal di Kota cirebon jl.pilang raya yuu mampir gw sediain kopi nanti.
+          <p class="intro-text">
+           Halo, saya Enang atau Enji (di dunia virtual). Aku lahir di Pemalang pada tanggal 22-03-2007 jika sekarang (2026) berarti sudah 19 tahun. Aku seorang santri sekaligus siswa SMK Jabal Toriq Boarding School, disana aku menjalani kehidupan seperti santri pada umum nya (ga cium" kaki kyai/hal buruk tentang santri di medsos ye anti disini mah, religius boleh goblok jangan). Aku sekarang tinggal di Kota cirebon jl.pilang raya yuu mampir gw sediain kopi nanti.
           </p>
-          <a href="https://wa.me/6283199503146" class="btn">Mari Mengobrol</a>
+          <div class="cta-group">
+            <a href="https://wa.me/6283199503146" class="btn primary">Mari Mengobrol (offline)</a>
+            <a href="https://instagram.com/fpeople___" class="btn secondary">Instagram (online)</a>
+          </div>
         </div>
-        <div class="card" style="align-items: center; justify-content: center; text-align: center;">
-          <img src="https://files.catbox.moe/vrttfw.jpeg" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 15px;">
-          <h3 style="font-family: 'Syne';">@fpeople___</h3>
-          <p style="color: var(--accent); font-size: 0.8rem; margin-top: 5px;">● Available for Work</p>
+        
+        <div class="card profile-card glass center-content">
+          <img src="https://files.catbox.moe/vrttfw.jpeg" class="profile-img">
+          <h3 class="syne">@fpeople___</h3>
+          <p class="status-badge">● Available for Work</p>
         </div>
-        <div class="card" style="justify-content: center;">
-          <p class="tag">Quick Stats</p>
-          <h2 style="font-size: 3rem; margin: 0;">01</h2>
-          <p style="color: var(--text-dim);">Tahun Pengalaman</p>
+
+        <div class="card stat-card glass center-content">
+          <p class="tag">Experience</p>
+          <h2 class="big-num">01</h2>
+          <p class="tag" style="margin: 10px 0 0 0">Tahun Belajar</p>
         </div>
       </div>
     </div>
@@ -47,35 +53,47 @@
     <div id="works" class="tab-content">
       <h1 class="page-title">ARSIP<br><span>PROYEK.</span></h1>
       <div class="bento">
-        <div class="card span-2">
-          <p class="tag">Selected Works</p>
+        <div class="card span-2 glass">
+          <p class="tag">Selected Projects</p>
+          
           <a href="https://downall.rf.gd" target="_blank" class="list-item">
-            <div>
+            <div class="item-info">
               <h3>DownloaderHub</h3>
-              <p style="color: var(--text-dim); font-size: 0.9rem; margin-top: 5px;">Web Application</p>
+              <p>PHP & JS API Integration</p>
             </div>
-            <span>[ BUKA ]</span>
+            <span class="view-tag">[ BUKA ]</span>
           </a>
+
+          <a href="https://hemat-in.fwh.is/" class="list-item">
+            <div class="item-info">
+              <h3>HEMAT-IN</h3>
+              <p>analisis tabungan mu biar hemat</p>
+            </div>
+            <span class="view-tag">[ BUKA ]</span>
+          </a>
+
           <a href="https://iqc-nji.vercel.app/" target="_blank" class="list-item">
-            <div>
+            <div class="item-info">
               <h3>Iphone Quick Chat</h3>
-              <p style="color: var(--text-dim); font-size: 0.9rem; margin-top: 5px;">UI Clone & Interaction</p>
+              <p>UI Clone & Interaction</p>
             </div>
-            <span>[ BUKA ]</span>
+            <span class="view-tag">[ BUKA ]</span>
           </a>
-           <a href="https://sovereign-nji.vercel.app/" target="_blank" class="list-item">
-            <div>
-              <h3>code snipset</h3>
-              <p style="color: var(--text-dim); font-size: 0.9rem; margin-top: 5px;">pengen naro kode/teks tapi takut ketauan orang? disini tempat nya. pilih code atau markdown (untuk teks) aktifkan privasi tinggal klik button priv lalu masukin pin nya 4 digit sisa dah isi isi aja bebas.</p>
+
+          <a href="https://sovereign-nji.vercel.app/" target="_blank" class="list-item">
+            <div class="item-info">
+              <h3>Code Snippet Store</h3>
+              <p>Secure text & code hosting with PIN privacy.</p>
             </div>
-            <span>[ BUKA ]</span>
+            <span class="view-tag">[ BUKA ]</span>
           </a>
-          <a href="https://fakecall-wa-nji.vercel.app/" class="list-item" style="border: none;">
-            <div>
-              <h3>Fake call wa</h3>
-              <p style="color: var(--text-dim); font-size: 0.9rem; margin-top: 5px;">buat tampilan seperti call di wa tapi fake</p>
+
+          <a href="https://fakecall-wa-nji.vercel.app/" target="_blank" class="list-item">
+            <div class="item-info">
+              <h3>Fake Call WA</h3>
+              <p>Simulation of WhatsApp incoming call UI.</p>
             </div>
-            <span>[ BUKA ]</span>
+            <span class="view-tag">[ BUKA ]</span>
           </a>
         </div>
       </div>
@@ -84,71 +102,75 @@
     <div id="stack" class="tab-content">
       <h1 class="page-title">TECH<br><span>& SETUP.</span></h1>
       <div class="bento">
-        <div class="card">
-          <p class="tag">Languages & Libs</p>
-          <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;">
-            <span style="padding: 8px 15px; background: rgba(255,255,255,0.05); border-radius: 8px;">JavaScript</span>
-            <span style="padding: 8px 15px; background: rgba(255,255,255,0.05); border-radius: 8px;">HTML5</span>
-            <span style="padding: 8px 15px; background: rgba(255,255,255,0.05); border-radius: 8px;">CSS3 / Tailwind</span>
+        <div class="card glass">
+          <p class="tag">Languages</p>
+          <div class="badge-container">
+            <span class="badge">PHP</span>
+            <span class="badge">JavaScript</span>
+            <span class="badge">CSS / Tailwind</span>
+            <span class="badge">HTML5</span>
           </div>
         </div>
-        <div class="card">
-          <p class="tag">Software</p>
-          <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;">
-            <span style="padding: 8px 15px; background: rgba(255,255,255,0.05); border-radius: 8px;">VS Code</span>
-            <span style="padding: 8px 15px; background: rgba(255,255,255,0.05); border-radius: 8px;">Figma</span>
-            <span style="padding: 8px 15px; background: rgba(255,255,255,0.05); border-radius: 8px;">Git / GitHub</span>
+        <div class="card glass">
+          <p class="tag">Tools</p>
+          <div class="badge-container">
+            <span class="badge">VS Code</span>
+            <span class="badge">Vercel</span>
+            <span class="badge">GitHub</span>
+            <span class="badge">Figma</span>
           </div>
         </div>
-        <div class="card span-2">
+        <div class="card span-2 glass">
           <p class="tag">Daily Setup</p>
-          <h2 style="font-size: 1.5rem;">hp samsung j7 pro + golda + music.</h2>
-          <p style="color: var(--text-dim); margin-top: 10px;">Gak butuh setup RGB atau meja mahal buat bikin kode yang jalan lancar. Yang penting logikanya nyambung dan internet stabil.</p>
+          <h2 class="syne">Samsung J7 Pro + Golda + Music.</h2>
+          <p class="intro-text">Kreativitas tidak terbatas pada perangkat keras. Fokus pada logika, bukan estetika meja kerja.</p>
         </div>
       </div>
     </div>
 
     <div id="journey" class="tab-content">
-  <h1 class="page-title">TIMELINE<br><span>& CERTS.</span></h1>
-  <div class="bento">
-    <div class="card span-2">
-      <p class="tag">Perjalanan</p>
-      <div style="margin-top: 20px;">
-        <div class="timeline-item">
-          <div class="timeline-year">2024 - SEKARANG</div>
-          <h3>Nyantri & Sekolah SMK</h3>
-          <p style="color: var(--text-dim); font-size: 0.9rem; margin-top: 5px;">
-            Menjalani kehidupan ganda sebagai Santri di Ponpes Jabal Toriq sekaligus siswa SMK.
-          </p>
+      <h1 class="page-title">TIMELINE<br><span>& CERTS.</span></h1>
+      <div class="bento">
+        <div class="card span-2 glass">
+          <p class="tag">Timeline</p>
+          <div class="timeline">
+           <div class="timeline-item">
+              <span class="year">2015 - 2021</span>
+              <h3>Siswa SD</h3>
+              <p class="intro-text">masa masa SD selama 6 tahun di SDN Sukapura 3 kota cirebon.</p>
+            </div>
+            <div class="timeline-item">
+              <span class="year">2021 - 2024</span>
+              <h3>Siswa MTS</h3>
+              <p class="intro-text">masa masa MTS selama 3 tahun di MTsN 1 kota cirebon</p>
+            </div>
+            <div class="timeline-item">
+              <span class="year">2024 - sekarangw</span>
+              <h3>Siswa SMK + santri</h3>
+              <p class="intro-text">menjalani sekolah SMK sekaligus santri di Jabal Thoriq boarding school.</p>
+            </div>
+          </div>
         </div>
-        <div class="timeline-item">
-          <div class="timeline-year">2026 - MASA DEPAN</div>
-          <h3>Fullstack Exploration</h3>
-          <p style="color: var(--text-dim); font-size: 0.9rem; margin-top: 5px;">
-            Fokus mengembangkan pendidikan tentang web development.
-          </p>
+
+        <div class="card span-2 glass">
+            <p class="tag">Connect Anywhere</p>
+            <div class="social-grid">
+              <a href="https://wa.me/6283199503146" class="social-link">WhatsApp</a>
+              <a href="https://instagram.com/fpeople___" class="social-link">Instagram</a>
+              <a href="https://t.me/@liyn_00" class="social-link">Telegram</a>
+            </div>
+        </div>
+
+        <div class="card span-2 glass center-content" style="padding: 60px 20px;">
+          <h2 class="mega-num">09+</h2>
+          <h3 class="syne">Sertifikat Kompetensi</h3>
+          <a href="https://my-galery-nji.vercel.app/" target="_blank" class="btn primary">Lihat Galeri Sertifikat</a>
         </div>
       </div>
     </div>
-
-    <div class="card span-2">
-      <p class="tag">Connect Anywhere</p>
-      <div class="social-grid">
-        <a href="https://wa.me/6283199503146" class="social-link wa">WhatsApp</a>
-        <a href="https://instagram.com/fpeople___" class="social-link ig">Instagram</a>
-        <a href="https://t.me/@liyn_00" class="social-link tg">Telegram</a>
-      </div>
-    </div>
-
-    <div class="card span-2" style="text-align: center; padding: 60px 20px;">
-      <h2 style="font-size: 4rem; color: var(--accent); margin-bottom: 10px;">09+</h2>
-      <h3>Sertifikat Kompetensi</h3>
-      <a href="https://my-galery-nji.vercel.app/" target="_blank" class="btn">Lihat Galeri Sertifikat</a>
-    </div>
-  </div>
-</div>
         
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
