@@ -1,126 +1,136 @@
 :root {
-  --bg: #050505;
-  --surface: #111111;
-  --border: rgba(255, 255, 255, 0.1);
+  --bg: #080808;
+  --surface: rgba(20, 20, 20, 0.6);
+  --border: rgba(255, 255, 255, 0.08);
   --text: #ffffff;
   --text-dim: rgba(255, 255, 255, 0.5);
   --accent: #00ff66; 
+  --glow: rgba(0, 255, 102, 0.2);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background-color: var(--bg); color: var(--text);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      overflow-x: hidden; padding-bottom: 120px;
-    }
 
-   
-     .social-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
-    margin-top: 10px;
-  }
-  .social-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 15px;
-    border-radius: 15px;
-    text-decoration: none;
-    font-weight: 800;
-    font-size: 0.9rem;
-    color: #fff;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border);
-    transition: 0.3s;
-  }
-  .social-link:hover { transform: translateY(-5px); border-color: var(--accent); }
-  .wa:hover { background: #25D366; color: #000; } /* WhatsApp Green */
-  .ig:hover { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%); } /* Instagram Gradient */
-  .tg:hover { background: #0088cc; } /* Telegram Blue */
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  overflow-x: hidden;
+  padding-bottom: 120px;
+  line-height: 1.5;
+}
 
- 
-  .timeline-item {
-    border-left: 2px solid var(--border);
-    padding-left: 25px;
-    margin-bottom: 40px;
-    position: relative;
-  }
-  .timeline-item::before {
-    content: "";
-    position: absolute;
-    left: -7px;
-    top: 0;
-    width: 12px;
-    height: 12px;
-    background: var(--accent);
-    border-radius: 50%;
-    box-shadow: 0 0 10px var(--accent);
-  }
-    .floating-nav {
-      position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-      background: rgba(17, 17, 17, 0.8); backdrop-filter: blur(20px);
-      border: 1px solid var(--border); border-radius: 100px;
-      display: flex; gap: 5px; padding: 8px; z-index: 9999;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-    }
-    .nav-btn {
-      background: transparent; border: none; color: var(--text-dim);
-      padding: 12px 24px; border-radius: 100px; font-family: inherit;
-      font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: 0.3s;
-    }
-    .nav-btn:hover { color: var(--text); }
-    .nav-btn.active { background: var(--text); color: var(--bg); }
+/* Background Glow Effect */
+.bg-glow {
+  position: fixed;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% -20%, #1a3325 0%, transparent 50%);
+  z-index: -1;
+  pointer-events: none;
+}
 
-   
-    .tab-content { display: none; opacity: 0; transform: translateY(20px); transition: 0.5s ease; }
-    .tab-content.active { display: block; opacity: 1; transform: translateY(0); animation: fadeUp 0.6s cubic-bezier(0.2, 1, 0.3, 1) forwards; }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+.syne { font-family: 'Syne', sans-serif; }
 
-    
-    .container { max-width: 1000px; margin: 0 auto; padding: 60px 24px; }
-    .page-title { font-family: 'Syne'; font-size: clamp(3rem, 8vw, 5rem); line-height: 1; margin-bottom: 40px; }
-    .page-title span { color: var(--text-dim); }
+/* Navigation */
+.floating-nav {
+  position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+  background: rgba(15, 15, 15, 0.7);
+  backdrop-filter: blur(15px);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  display: flex; gap: 5px; padding: 6px; z-index: 10000;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
 
-    .bento { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-    .card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 24px; padding: 40px; display: flex; flex-direction: column;
-      transition: 0.3s;
-    }
-    .card:hover { border-color: rgba(255,255,255,0.3); }
-    .span-2 { grid-column: span 2; }
+.nav-btn {
+  background: transparent; border: none; color: var(--text-dim);
+  padding: 10px 20px; border-radius: 100px; font-family: inherit;
+  font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: 0.3s;
+}
 
-    @media (max-width: 768px) {
-      .bento { grid-template-columns: 1fr; }
-      .span-2 { grid-column: span 1; }
-      .floating-nav { width: 90%; justify-content: space-between; padding: 5px; }
-      .nav-btn { padding: 10px 15px; font-size: 0.8rem; }
-    }
+.nav-btn.active { background: var(--text); color: var(--bg); box-shadow: 0 0 15px rgba(255,255,255,0.2); }
 
-    
-    .tag { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 15px; }
-    h2 { font-family: 'Syne'; font-size: 2rem; margin-bottom: 15px; }
-    
-    .btn {
-      padding: 15px 30px; background: var(--text); color: var(--bg);
-      border-radius: 100px; text-decoration: none; font-weight: 800;
-      display: inline-block; width: fit-content; margin-top: 20px;
-    }
+/* Containers & Bento */
+.container { max-width: 900px; margin: 0 auto; padding: 80px 20px; }
+.page-title { font-family: 'Syne'; font-size: clamp(3rem, 10vw, 5.5rem); line-height: 0.9; margin-bottom: 50px; font-weight: 800; }
+.page-title span { color: var(--text-dim); font-weight: 400; }
 
-   
-    .list-item {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 20px 0; border-bottom: 1px solid var(--border); text-decoration: none; color: inherit;
-    }
-    .list-item:hover { color: var(--accent); padding-left: 10px; transition: 0.3s; }
-    .list-item h3 { font-family: 'Syne'; font-size: 1.5rem; }
+.bento { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
 
-   
-    .timeline-item { border-left: 2px solid var(--border); padding-left: 20px; margin-bottom: 30px; position: relative; }
-    .timeline-item::before { content: ""; position: absolute; left: -6px; top: 0; width: 10px; height: 10px; background: var(--accent); border-radius: 50%; }
-    .timeline-year { font-size: 0.8rem; color: var(--text-dim); margin-bottom: 5px; font-weight: 800; }
+.glass { backdrop-filter: blur(10px); }
+.card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 10px 30px var(--glow); }
+.span-2 { grid-column: span 2; }
+
+/* Components */
+.tag { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; font-weight: 800; }
+.intro-text { color: var(--text-dim); font-size: 1.05rem; margin-top: 10px; }
+
+.btn {
+  padding: 14px 28px; border-radius: 100px; text-decoration: none; 
+  font-weight: 700; font-size: 0.9rem; transition: 0.3s; display: inline-block;
+}
+.btn.primary { background: var(--text); color: var(--bg); margin-top: 25px; }
+.btn.secondary { border: 1px solid var(--border); color: var(--text); margin-left: 10px; margin-top: 25px;}
+.btn:hover { opacity: 0.8; transform: scale(1.05); }
+
+.profile-img { width: 80px; height: 80px; border-radius: 50%; margin-bottom: 15px; border: 2px solid var(--border); object-fit: cover;}
+.status-badge { color: var(--accent); font-size: 0.75rem; margin-top: 8px; font-weight: 600; }
+
+.big-num { font-size: 4rem; font-family: 'Syne'; margin: -10px 0; color: var(--text); }
+.mega-num { font-size: 6rem; font-family: 'Syne'; color: var(--accent); line-height: 1; }
+
+.badge-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+.badge { padding: 6px 14px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 8px; font-size: 0.8rem; }
+
+/* List Items (Works) */
+.list-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 25px 0; border-bottom: 1px solid var(--border); text-decoration: none; color: inherit;
+}
+.list-item:last-child { border: none; }
+.list-item h3 { font-family: 'Syne'; font-size: 1.3rem; transition: 0.3s; }
+.list-item p { font-size: 0.85rem; color: var(--text-dim); margin-top: 4px; }
+.list-item:hover h3 { color: var(--accent); transform: translateX(10px); }
+.view-tag { font-size: 0.75rem; font-weight: 800; color: var(--text-dim); }
+
+/* Timeline */
+.timeline { margin-top: 20px; }
+.timeline-item { border-left: 1px solid var(--border); padding-left: 20px; padding-bottom: 30px; position: relative; }
+.timeline-item::before { content: ""; position: absolute; left: -5px; top: 0; width: 9px; height: 9px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--accent); }
+.year { font-size: 0.75rem; font-weight: 800; color: var(--text-dim); }
+
+.center-content { align-items: center; justify-content: center; text-align: center; }
+
+/* Social Links */
+.social-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 20px; width: 100%; }
+.social-link { display: flex; align-items: center; justify-content: center; padding: 15px; border-radius: 15px; text-decoration: none; font-weight: 800; font-size: 0.9rem; color: #fff; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); transition: 0.3s; }
+.social-link:hover { transform: translateY(-5px); border-color: var(--accent); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .bento { grid-template-columns: 1fr; }
+  .span-2 { grid-column: span 1; }
+  .page-title { font-size: 3.5rem; }
+  .floating-nav { width: 92%; }
+  .nav-btn { padding: 10px 12px; font-size: 0.75rem; }
+}
+
+/* Tab Animation */
+.tab-content { display: none; opacity: 0; }
+.tab-content.active { display: block; animation: fadeInUp 0.5s forwards ease-out; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
