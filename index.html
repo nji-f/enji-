@@ -10,24 +10,24 @@
     <script type="importmap">
         {
             "imports": {
-                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
             }
         }
     </script>
 </head>
 <body>
-    <canvas id="three-canvas" aria-label="Galeri virtual 3D interaktif"></canvas>
+    <canvas id="three-canvas" aria-hidden="true"></canvas>
 
     <div class="main-wrapper">
         <div class="floating-nav">
-            <button class="nav-btn active" data-target="home">Home</button>
-            <button class="nav-btn" data-target="works">Works</button>
-            <button class="nav-btn" data-target="stack">Stack</button>
-            <button class="nav-btn" data-target="journey">Journey</button>
+            <button class="nav-btn active" data-target="home" aria-label="Ke halaman Home">Home</button>
+            <button class="nav-btn" data-target="works" aria-label="Ke halaman Works">Works</button>
+            <button class="nav-btn" data-target="stack" aria-label="Ke halaman Stack">Stack</button>
+            <button class="nav-btn" data-target="journey" aria-label="Ke halaman Journey">Journey</button>
         </div>
 
         <div class="container">
+            <!-- HOME -->
             <div id="home" class="tab-content active">
                 <h1 class="page-title">ENJI.<br /><span>Bukan dev.</span></h1>
                 <div class="bento">
@@ -38,17 +38,15 @@
                             Halo, saya Enang atau Enji (di dunia virtual). Aku lahir di Pemalang pada tanggal 22-03-2007 jika sekarang (2026) berarti sudah 19 tahun. Aku seorang santri sekaligus siswa SMK Jabal Toriq Boarding School, disana aku menjalani kehidupan seperti santri pada umum nya (ga cium" kaki kyai/hal buruk tentang santri di medsos ye anti disini mah, religius boleh goblok jangan). Aku sekarang tinggal di Kota cirebon jl.pilang raya yuu mampir gw sediain kopi nanti.
                         </p>
                         <div class="cta-group">
-                            <a href="https://wa.me/6283199503146" class="btn primary">Mari Mengobrol (offline)</a>
-                            <a href="https://instagram.com/fpeople___" class="btn secondary">Instagram (online)</a>
+                            <a href="https://wa.me/6283199503146" class="btn primary" aria-label="Chat via WhatsApp">Mari Mengobrol (offline)</a>
+                            <a href="https://instagram.com/fpeople___" class="btn secondary" aria-label="Kunjungi Instagram">Instagram (online)</a>
                         </div>
                     </div>
-
                     <div class="card center-content" style="grid-column: span 1;">
-                        <img src="https://www.image2url.com/r2/default/gifs/1777742797073-95733b7b-7378-4c89-bc1b-3864847029fe.gif" class="profile-img" alt="Foto Enji" />
+                        <img src="https://www.image2url.com/r2/default/gifs/1777742797073-95733b7b-7378-4c89-bc1b-3864847029fe.gif" class="profile-img" alt="Foto profil Enji" />
                         <h3 style="font-family: var(--font-heading);">@fpeople___</h3>
                         <p class="status-badge">● Available for Work</p>
                     </div>
-
                     <div class="card center-content" style="grid-column: span 1;">
                         <p class="tag">Experience</p>
                         <h2 class="big-num">01</h2>
@@ -57,53 +55,49 @@
                 </div>
             </div>
 
+            <!-- WORKS -->
             <div id="works" class="tab-content">
                 <h1 class="page-title">ARSIP<br /><span>PROYEK.</span></h1>
                 <div class="bento">
                     <div class="card span-2">
                         <p class="tag">Selected Projects</p>
 
-                        <a href="https://downall.rf.gd" target="_blank" class="list-item">
+                        <a href="https://downall.rf.gd" target="_blank" class="list-item" aria-label="DownloaderHub">
                             <div class="item-info">
                                 <h3>DownloaderHub</h3>
                                 <p>PHP & JS API Integration</p>
                             </div>
                             <span class="view-tag">[ BUKA ]</span>
                         </a>
-
-                        <a href="https://hemat-in.fwh.is/" class="list-item">
+                        <a href="https://hemat-in.fwh.is/" class="list-item" aria-label="HEMAT-IN">
                             <div class="item-info">
                                 <h3>HEMAT-IN</h3>
                                 <p>analisis tabungan mu biar hemat</p>
                             </div>
                             <span class="view-tag">[ BUKA ]</span>
                         </a>
-
-                        <a href="https://iqc-nji.vercel.app/" target="_blank" class="list-item">
+                        <a href="https://iqc-nji.vercel.app/" target="_blank" class="list-item" aria-label="Iphone Quick Chat">
                             <div class="item-info">
                                 <h3>Iphone Quick Chat</h3>
                                 <p>UI Clone & Interaction</p>
                             </div>
                             <span class="view-tag">[ BUKA ]</span>
                         </a>
-
-                        <a href="https://ambacode.ct.ws" target="_blank" class="list-item">
+                        <a href="https://ambacode.ct.ws" target="_blank" class="list-item" aria-label="ambacode">
                             <div class="item-info">
                                 <h3>ambacode</h3>
                                 <p>tempatnya berbagai source code</p>
                             </div>
                             <span class="view-tag">[ BUKA ]</span>
                         </a>
-
-                        <a href="https://sovereign-nji.vercel.app/" target="_blank" class="list-item">
+                        <a href="https://sovereign-nji.vercel.app/" target="_blank" class="list-item" aria-label="Code Snippet Store">
                             <div class="item-info">
                                 <h3>Code Snippet Store</h3>
                                 <p>Secure text & code hosting with PIN privacy.</p>
                             </div>
                             <span class="view-tag">[ BUKA ]</span>
                         </a>
-
-                        <a href="https://fakecall-wa-nji.vercel.app/" target="_blank" class="list-item">
+                        <a href="https://fakecall-wa-nji.vercel.app/" target="_blank" class="list-item" aria-label="Fake Call WA">
                             <div class="item-info">
                                 <h3>Fake Call WA</h3>
                                 <p>Simulation of WhatsApp incoming call UI.</p>
@@ -114,6 +108,7 @@
                 </div>
             </div>
 
+            <!-- STACK -->
             <div id="stack" class="tab-content">
                 <h1 class="page-title">TECH<br /><span>& SETUP.</span></h1>
                 <div class="bento">
@@ -143,6 +138,7 @@
                 </div>
             </div>
 
+            <!-- JOURNEY -->
             <div id="journey" class="tab-content">
                 <h1 class="page-title">TIMELINE<br /><span>& CERTS.</span></h1>
                 <div class="bento">
@@ -170,21 +166,24 @@
                     <div class="card span-2">
                         <p class="tag">Connect Anywhere</p>
                         <div class="social-grid">
-                            <a href="https://wa.me/6283199503146" class="social-link">WhatsApp</a>
-                            <a href="https://instagram.com/fpeople___" class="social-link">Instagram</a>
-                            <a href="https://t.me/@liyn_00" class="social-link">Telegram</a>
+                            <a href="https://wa.me/6283199503146" class="social-link" aria-label="WhatsApp">📱 WhatsApp</a>
+                            <a href="https://instagram.com/fpeople___" class="social-link" aria-label="Instagram">📸 Instagram</a>
+                            <a href="https://t.me/@liyn_00" class="social-link" aria-label="Telegram">✈️ Telegram</a>
                         </div>
                     </div>
 
                     <div class="card span-2 center-content" style="padding: 60px 20px;">
                         <h2 class="mega-num">09+</h2>
                         <h3 style="font-family: var(--font-heading);">Sertifikat Kompetensi</h3>
-                        <a href="https://my-galery-nji.vercel.app/" target="_blank" class="btn primary">Lihat Galeri Sertifikat</a>
+                        <a href="https://my-galery-nji.vercel.app/" target="_blank" class="btn primary" aria-label="Lihat galeri sertifikat">Lihat Galeri Sertifikat →</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Tombol kembali ke atas -->
+    <button id="back-to-top" aria-label="Kembali ke atas">↑</button>
 
     <script type="module" src="script.js"></script>
 </body>
