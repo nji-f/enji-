@@ -28,7 +28,7 @@ scene.add(ambient);
 const spotLight1 = new THREE.SpotLight('#ffffff', 40, 30, Math.PI / 4.5, 0.2, 0.4);
 spotLight1.position.set(5, 8, 3);
 spotLight1.castShadow = true;
-spotLight1.shadow.mapSize.set(1024, 1024);  // ← resolusi dikurangi
+spotLight1.shadow.mapSize.set(1024, 1024);
 spotLight1.shadow.bias = -0.00015;
 spotLight1.shadow.normalBias = 0.02;
 scene.add(spotLight1);
@@ -265,9 +265,7 @@ const groupsForTab = {
 };
 
 function setVisibleGroups(tab) {
-    // Sembunyikan semua grup dulu
     [podiumGroup, projectsGroup, skillsGroup, contactGroup].forEach(g => g.visible = false);
-    // Tampilkan yang sesuai
     if (groupsForTab[tab]) {
         groupsForTab[tab].forEach(g => g.visible = true);
     }
@@ -292,7 +290,6 @@ window.addEventListener('resize', () => {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
-        // Perbarui juga pixel ratio jika perlu (mobile vs desktop)
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 2 : 2.5));
     }, 150);
 });
@@ -335,11 +332,212 @@ backToTopBtn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
+// ============================================================
+// 1. MODE REDUCE MOTION
+// ============================================================
+const motionToggle = document.getElementById('motion-toggle');
+const motionIcon = motionToggle.querySelector('.motion-icon');
+let reducedMotion = localStorage.getItem('enji-reduced-motion') === 'true';
+
+function applyReducedMotion(reduced) {
+    if (reduced) {
+        document.body.classList.add('reduced-motion');
+        motionIcon.textContent = '🌙';
+        motionToggle.classList.add('motion-reduced');
+        mouse.enabled = false;
+    } else {
+        document.body.classList.remove('reduced-motion');
+        motionIcon.textContent = '✨';
+        motionToggle.classList.remove('motion-reduced');
+        mouse.enabled = !isMobile;
+    }
+}
+
+applyReducedMotion(reducedMotion);
+
+motionToggle.addEventListener('click', () => {
+    reducedMotion = !reducedMotion;
+    localStorage.setItem('enji-reduced-motion', reducedMotion);
+    applyReducedMotion(reducedMotion);
+});
+
+// ============================================================
+// 2. CUSTOM CURSOR
+// ============================================================
+const cursor = document.getElementById('custom-cursor');
+
+if (!isMobile) {
+    let cursorVisible = true;
+
+    document.addEventListener('mousemove', (e) => {
+        if (!cursorVisible) {
+            cursor.style.opacity = '0.7';
+            cursorVisible = true;
+        }
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+    });
+
+    const hoverTargets = document.querySelectorAll('a, button, .nav-btn, .list-item, .social-link, .badge, #back-to-top, #motion-toggle');
+
+    hoverTargets.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursor.classList.add('hovering');
+        });
+        el.addEventListener('mouseleave', () => {
+            cursor.classList.remove('hovering');
+        });
+    });
+
+    document.addEventListener('mouseleave', () => {
+        cursor.style.opacity = '0';
+        cursorVisible = false;
+    });
+
+    document.addEventListener('mouseenter', () => {
+        cursor.style.opacity = '0.7';
+        cursorVisible = true;
+    });
+}
+
+// ============================================================
+// 3. MUSIC PLAYER
+// ============================================================
+const bgMusic = document.getElementById('bg-music');
+const musicPlayBtn = document.getElementById('music-play');
+const musicProgressFill = document.getElementById('music-progress-fill');
+const musicProgressBar = document.getElementById('music-progress-bar');
+const musicTimeEl = document.getElementById('music-time');
+const musicCloseBtn = document.getElementById('music-close');
+const musicPlayer = document.getElementById('music-player');
+const musicTitle = document.getElementById('music-title');
+const musicDragHandle = document.getElementById('music-drag-handle');
+
+let isMusicPlaying = false;
+let musicDrag = false;
+let dragOffsetX = 0, dragOffsetY = 0;
+
+function formatTime(seconds) {
+    const m = Math.floor(seconds / 60);
+    const s = Math.floor(seconds % 60);
+    return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+}
+
+musicPlayBtn.addEventListener('click', () => {
+    if (isMusicPlaying) {
+        bgMusic.pause();
+        musicPlayBtn.textContent = '▶️';
+        musicTitle.textContent = 'Lo-Fi Chill (Paused)';
+    } else {
+        bgMusic.play().catch(() => {
+            alert('Klik lagi untuk mulai musik 🎵');
+        });
+        musicPlayBtn.textContent = '⏸️';
+        musicTitle.textContent = 'Lo-Fi Chill';
+    }
+    isMusicPlaying = !isMusicPlaying;
+});
+
+bgMusic.addEventListener('timeupdate', () => {
+    if (bgMusic.duration) {
+        const progress = (bgMusic.currentTime / bgMusic.duration) * 100;
+        musicProgressFill.style.width = progress + '%';
+        musicTimeEl.textContent = formatTime(bgMusic.currentTime);
+    }
+});
+
+musicProgressBar.addEventListener('click', (e) => {
+    const rect = musicProgressBar.getBoundingClientRect();
+    const ratio = (e.clientX - rect.left) / rect.width;
+    if (bgMusic.duration) {
+        bgMusic.currentTime = ratio * bgMusic.duration;
+    }
+});
+
+musicCloseBtn.addEventListener('click', () => {
+    musicPlayer.classList.toggle('minimized');
+    musicCloseBtn.textContent = musicPlayer.classList.contains('minimized') ? '+' : '×';
+});
+
+// Drag player (mouse)
+musicDragHandle.addEventListener('mousedown', (e) => {
+    e.preventDefault();
+    musicDrag = true;
+    const rect = musicPlayer.getBoundingClientRect();
+    dragOffsetX = e.clientX - rect.left;
+    dragOffsetY = e.clientY - rect.top;
+    musicPlayer.style.transition = 'none';
+});
+
+document.addEventListener('mousemove', (e) => {
+    if (!musicDrag) return;
+    musicPlayer.style.right = 'auto';
+    musicPlayer.style.bottom = 'auto';
+    musicPlayer.style.left = (e.clientX - dragOffsetX) + 'px';
+    musicPlayer.style.top = (e.clientY - dragOffsetY) + 'px';
+});
+
+document.addEventListener('mouseup', () => {
+    if (musicDrag) {
+        musicDrag = false;
+        musicPlayer.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+    }
+});
+
+// Drag player (touch)
+musicDragHandle.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    musicDrag = true;
+    const rect = musicPlayer.getBoundingClientRect();
+    dragOffsetX = e.touches[0].clientX - rect.left;
+    dragOffsetY = e.touches[0].clientY - rect.top;
+    musicPlayer.style.transition = 'none';
+}, { passive: false });
+
+document.addEventListener('touchmove', (e) => {
+    if (!musicDrag) return;
+    musicPlayer.style.right = 'auto';
+    musicPlayer.style.bottom = 'auto';
+    musicPlayer.style.left = (e.touches[0].clientX - dragOffsetX) + 'px';
+    musicPlayer.style.top = (e.touches[0].clientY - dragOffsetY) + 'px';
+}, { passive: false });
+
+document.addEventListener('touchend', () => {
+    if (musicDrag) {
+        musicDrag = false;
+        musicPlayer.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+    }
+});
+
+// Simpan posisi player
+const savedPlayerPos = JSON.parse(localStorage.getItem('enji-player-pos') || 'null');
+if (savedPlayerPos) {
+    musicPlayer.style.right = 'auto';
+    musicPlayer.style.bottom = 'auto';
+    musicPlayer.style.left = savedPlayerPos.left;
+    musicPlayer.style.top = savedPlayerPos.top;
+}
+
+window.addEventListener('beforeunload', () => {
+    const rect = musicPlayer.getBoundingClientRect();
+    localStorage.setItem('enji-player-pos', JSON.stringify({
+        left: musicPlayer.style.left || (window.innerWidth - rect.right) + 'px',
+        top: musicPlayer.style.top || (window.innerHeight - rect.bottom) + 'px'
+    }));
+});
+
 // ==================== ANIMASI LOOP ====================
 const clock = new THREE.Clock();
 function animate() {
     const dt = Math.min(clock.getDelta(), 0.1);
     const elapsed = clock.elapsedTime;
+
+    if (reducedMotion) {
+        // Mode reduce motion: render statis
+        renderer.render(scene, camera);
+        requestAnimationFrame(animate);
+        return;
+    }
 
     if (mouse.enabled) {
         mouse.x += (mouse.targetX - mouse.x) * 3.5 * dt;
@@ -374,7 +572,6 @@ function animate() {
     const targetPos = target.pos.clone();
     const targetLook = target.look.clone();
 
-    // Hanya gunakan mouse parallax jika bukan sentuh
     if (mouse.enabled) {
         targetPos.x += mouse.x * 0.65;
         targetPos.y += mouse.y * 0.35;
