@@ -9,6 +9,7 @@
     --accent3: #fc5c9c;
     --glow: rgba(124, 92, 252, 0.25);
     --font-heading: 'Syne', sans-serif;
+    --status-green: #a0ff80;
 }
 
 * {
@@ -25,6 +26,7 @@ body {
     padding-bottom: 130px;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
 }
 
 #three-canvas {
@@ -43,6 +45,7 @@ body {
     pointer-events: auto;
 }
 
+/* --- Floating Nav --- */
 .floating-nav {
     position: fixed;
     bottom: 30px;
@@ -78,6 +81,17 @@ body {
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
 }
 
+/* Fokus keyboard yang terlihat jelas */
+.nav-btn:focus-visible,
+.btn:focus-visible,
+.social-link:focus-visible,
+.list-item:focus-visible,
+#back-to-top:focus-visible {
+    outline: 2px solid var(--accent2);
+    outline-offset: 3px;
+}
+
+/* Container */
 .container {
     max-width: 900px;
     margin: 0 auto;
@@ -90,6 +104,7 @@ body {
     line-height: 0.9;
     margin-bottom: 50px;
     font-weight: 800;
+    position: relative;
 }
 
 .page-title span {
@@ -97,6 +112,18 @@ body {
     font-weight: 400;
 }
 
+/* Garis pemisah kecil di bawah judul utama */
+.page-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--accent2);
+    margin-top: 15px;
+    border-radius: 2px;
+}
+
+/* --- Bento Grid --- */
 .bento {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -170,6 +197,7 @@ body {
     transform: scale(1.05);
 }
 
+/* Gambar profil */
 .profile-img {
     width: 85px;
     height: 85px;
@@ -179,11 +207,13 @@ body {
     object-fit: cover;
 }
 
+/* Badge status online – lebih mencolok */
 .status-badge {
-    color: var(--accent2);
+    color: var(--status-green);
     font-size: 0.75rem;
     margin-top: 8px;
     font-weight: 600;
+    text-shadow: 0 0 12px var(--status-green);
 }
 
 .big-num {
@@ -215,6 +245,7 @@ body {
     font-size: 0.8rem;
 }
 
+/* List Item Project */
 .list-item {
     display: flex;
     justify-content: space-between;
@@ -253,6 +284,7 @@ body {
     color: var(--text-dim);
 }
 
+/* Timeline */
 .timeline {
     margin-top: 20px;
 }
@@ -288,10 +320,11 @@ body {
     text-align: center;
 }
 
+/* Social Grid – lebih kecil & pakai ikon */
 .social-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
     margin-top: 20px;
     width: 100%;
 }
@@ -300,15 +333,16 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 15px;
+    padding: 12px 10px;
     border-radius: 15px;
     text-decoration: none;
     font-weight: 800;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #fff;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--border);
     transition: 0.3s;
+    gap: 6px;
 }
 
 .social-link:hover {
@@ -316,6 +350,34 @@ body {
     border-color: var(--accent2);
 }
 
+/* Tombol Kembali ke Atas */
+#back-to-top {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(15, 15, 30, 0.75);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 10001;
+    display: none; /* muncul ketika scroll */
+    transition: 0.3s;
+    align-items: center;
+    justify-content: center;
+}
+
+#back-to-top:hover {
+    background: var(--text);
+    color: var(--bg);
+    border-color: var(--text);
+}
+
+/* Tab Animation */
 .tab-content {
     display: none;
     opacity: 0;
@@ -337,6 +399,7 @@ body {
     }
 }
 
+/* --- Mobile --- */
 @media (max-width: 768px) {
     .bento {
         grid-template-columns: 1fr;
@@ -354,8 +417,15 @@ body {
         padding: 10px 12px;
         font-size: 0.75rem;
     }
+    #back-to-top {
+        bottom: 90px;
+        right: 12px;
+        width: 40px;
+        height: 40px;
+    }
 }
 
+/* Prefers Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
