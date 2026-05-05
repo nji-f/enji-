@@ -25,7 +25,32 @@
             <button class="nav-btn" data-target="stack" aria-label="Ke halaman Stack">Stack</button>
             <button class="nav-btn" data-target="journey" aria-label="Ke halaman Journey">Journey</button>
         </div>
+<!-- ==================== MODE REDUCE MOTION TOGGLE ==================== -->
+<button id="motion-toggle" aria-label="Toggle reduce motion" title="Reduce Motion">
+    <span class="motion-icon">✨</span>
+</button>
 
+<!-- ==================== CUSTOM CURSOR ==================== -->
+<div id="custom-cursor" aria-hidden="true"></div>
+
+<!-- ==================== MUSIC PLAYER ==================== -->
+<div class="music-player" id="music-player">
+    <div class="music-header" id="music-drag-handle">
+        <span class="music-icon">🎵</span>
+        <span class="music-title" id="music-title">Lo-Fi Chill</span>
+        <button class="music-close" id="music-close" aria-label="Tutup music player">×</button>
+    </div>
+    <div class="music-controls">
+        <button class="music-btn" id="music-play" aria-label="Play/Pause">▶️</button>
+        <div class="music-progress" id="music-progress-bar">
+            <div class="music-progress-fill" id="music-progress-fill"></div>
+        </div>
+        <span class="music-time" id="music-time">00:00</span>
+    </div>
+</div>
+<audio id="bg-music" loop preload="none">
+    <source src="https://files.catbox.moe/4q57iv.mp3" type="audio/mpeg">
+</audio>
         <div class="container">
             <!-- HOME -->
             <div id="home" class="tab-content active">
