@@ -1,8 +1,11 @@
 import * as THREE from 'three';
 
+// ==================== SETUP DASAR ====================
 const canvas = document.getElementById('three-canvas');
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 2 : 2.5));
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -18,13 +21,14 @@ const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerH
 camera.position.set(0, 2.2, 9);
 camera.lookAt(0, 0.5, 0);
 
+// ==================== PENCERAHAN ====================
 const ambient = new THREE.AmbientLight('#3a3060', 1.0);
 scene.add(ambient);
 
 const spotLight1 = new THREE.SpotLight('#ffffff', 40, 30, Math.PI / 4.5, 0.2, 0.4);
 spotLight1.position.set(5, 8, 3);
 spotLight1.castShadow = true;
-spotLight1.shadow.mapSize.set(2048, 2048);
+spotLight1.shadow.mapSize.set(1024, 1024);  // ← resolusi dikurangi
 spotLight1.shadow.bias = -0.00015;
 spotLight1.shadow.normalBias = 0.02;
 scene.add(spotLight1);
@@ -32,7 +36,7 @@ scene.add(spotLight1);
 const spotLight2 = new THREE.SpotLight('#7c5cfc', 22, 28, Math.PI / 5.5, 0.3, 0.5);
 spotLight2.position.set(-4, 7, -2);
 spotLight2.castShadow = true;
-spotLight2.shadow.mapSize.set(2048, 2048);
+spotLight2.shadow.mapSize.set(1024, 1024);
 spotLight2.shadow.bias = -0.0001;
 scene.add(spotLight2);
 
@@ -44,9 +48,18 @@ const pointLight2 = new THREE.PointLight('#fc5c9c', 8, 10);
 pointLight2.position.set(-2.5, 1.2, 5);
 scene.add(pointLight2);
 
-const roomWidth = 15;
-const roomHeight = 6.8;
-const roomDepth = 17;
+// ==================== WARNA 3D (disinkronkan dengan CSS) ====================
+const COL = {
+    bg: '#080818',
+    surface: '#0d0d20',
+    accent: '#7c5cfc',
+    accent2: '#5ce0d4',
+    accent3: '#fc5c9c',
+    dim: '#1f1f3a',
+};
+
+// ==================== RUANGAN & LANTAI ====================
+const roomWidth = 15, roomHeight = 6.8, roomDepth = 17;
 
 const floor = new THREE.Mesh(
     new THREE.PlaneGeometry(roomWidth, roomDepth),
@@ -57,11 +70,11 @@ floor.position.y = -2.3;
 floor.receiveShadow = true;
 scene.add(floor);
 
-const gridHelper = new THREE.PolarGridHelper(7.5, 40, 24, 256, '#1f1f3a', '#1f1f3a');
+const gridHelper = new THREE.PolarGridHelper(7.5, 40, 24, 256, COL.dim, COL.dim);
 gridHelper.position.y = -2.29;
 scene.add(gridHelper);
 
-const wallMat = new THREE.MeshStandardMaterial({ color: '#0d0d20', roughness: 0.55, metalness: 0.08, side: THREE.DoubleSide });
+const wallMat = new THREE.MeshStandardMaterial({ color: COL.surface, roughness: 0.55, metalness: 0.08, side: THREE.DoubleSide });
 
 const backWall = new THREE.Mesh(new THREE.PlaneGeometry(roomWidth, roomHeight), wallMat);
 backWall.position.set(0, roomHeight / 2 - 2.3, -roomDepth / 2);
@@ -86,6 +99,8 @@ ceiling.rotation.x = Math.PI / 2;
 ceiling.position.y = roomHeight - 2.3;
 scene.add(ceiling);
 
+// ==================== GRUP OBJEK ====================
+// --- Home: Podium & Hero ---
 const podiumGroup = new THREE.Group();
 podiumGroup.position.set(0, -2.3, -1.5);
 scene.add(podiumGroup);
@@ -110,7 +125,7 @@ podiumGroup.add(topDisc);
 
 const heroObj = new THREE.Mesh(
     new THREE.TorusKnotGeometry(0.65, 0.16, 200, 28),
-    new THREE.MeshPhysicalMaterial({ color: '#7c5cfc', metalness: 0.04, roughness: 0.09, clearcoat: 0.65, clearcoatRoughness: 0.04, emissive: '#140830', emissiveIntensity: 0.6 })
+    new THREE.MeshPhysicalMaterial({ color: COL.accent, metalness: 0.04, roughness: 0.09, clearcoat: 0.65, clearcoatRoughness: 0.04, emissive: '#140830', emissiveIntensity: 0.6 })
 );
 heroObj.position.y = 2.3;
 heroObj.castShadow = true;
@@ -119,7 +134,7 @@ podiumGroup.add(heroObj);
 
 const heroRing = new THREE.Mesh(
     new THREE.TorusGeometry(1.0, 0.02, 32, 200),
-    new THREE.MeshStandardMaterial({ color: '#5ce0d4', metalness: 0.95, roughness: 0.1, emissive: '#052520', emissiveIntensity: 0.9 })
+    new THREE.MeshStandardMaterial({ color: COL.accent2, metalness: 0.95, roughness: 0.1, emissive: '#052520', emissiveIntensity: 0.9 })
 );
 heroRing.position.y = 2.3;
 heroRing.castShadow = true;
@@ -127,13 +142,14 @@ podiumGroup.add(heroRing);
 
 const heroRing2 = new THREE.Mesh(
     new THREE.TorusGeometry(1.15, 0.018, 32, 160),
-    new THREE.MeshStandardMaterial({ color: '#fc5c9c', metalness: 0.95, roughness: 0.1, emissive: '#200810', emissiveIntensity: 0.7 })
+    new THREE.MeshStandardMaterial({ color: COL.accent3, metalness: 0.95, roughness: 0.1, emissive: '#200810', emissiveIntensity: 0.7 })
 );
 heroRing2.position.y = 2.3;
 heroRing2.rotation.x = Math.PI / 2;
 heroRing2.castShadow = true;
 podiumGroup.add(heroRing2);
 
+// --- Works: Proyek ---
 const projectsGroup = new THREE.Group();
 projectsGroup.position.set(5.8, -0.5, 2.2);
 scene.add(projectsGroup);
@@ -144,10 +160,10 @@ const projShapes = [
     new THREE.CylinderGeometry(0.3, 0.3, 0.95, 16),
     new THREE.TorusKnotGeometry(0.28, 0.08, 80, 8),
 ];
-const projColors = ['#7c5cfc', '#5ce0d4', '#fc5c9c'];
+const projColors = [COL.accent, COL.accent2, COL.accent3];
 
 projShapes.forEach((geo, i) => {
-    const ped = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.25, 0.9), new THREE.MeshStandardMaterial({ color: '#1f1f3a', roughness: 0.3, metalness: 0.7 }));
+    const ped = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.25, 0.9), new THREE.MeshStandardMaterial({ color: COL.dim, roughness: 0.3, metalness: 0.7 }));
     ped.position.set(0, i * 2.0, 0);
     ped.castShadow = true;
     ped.receiveShadow = true;
@@ -169,12 +185,13 @@ projSpot.target.position.set(5.8, 0.8, 2.2);
 scene.add(projSpot);
 scene.add(projSpot.target);
 
+// --- Stack: Skill Bars ---
 const skillsGroup = new THREE.Group();
 skillsGroup.position.set(-6.0, -1.7, 2.8);
 scene.add(skillsGroup);
 
 const skillLevels = [0.95, 0.90, 0.88, 0.85, 0.92, 0.96];
-const skillColors = ['#7c5cfc', '#6e4ff0', '#5ce0d4', '#48c9b8', '#fc5c9c', '#e84a88'];
+const skillColors = [COL.accent, '#6e4ff0', COL.accent2, '#48c9b8', COL.accent3, '#e84a88'];
 const skillBars = [];
 
 skillLevels.forEach((lvl, i) => {
@@ -191,19 +208,20 @@ skillLevels.forEach((lvl, i) => {
     skillBars.push(bar);
 });
 
+// --- Journey: Kontak Sphere ---
 const contactGroup = new THREE.Group();
 contactGroup.position.set(0, -1.1, -5.8);
 scene.add(contactGroup);
 
 const contactSphere = new THREE.Mesh(
     new THREE.SphereGeometry(0.85, 64, 64),
-    new THREE.MeshPhysicalMaterial({ color: '#7c5cfc', metalness: 0.04, roughness: 0.07, clearcoat: 0.75, emissive: '#100830', emissiveIntensity: 0.8 })
+    new THREE.MeshPhysicalMaterial({ color: COL.accent, metalness: 0.04, roughness: 0.07, clearcoat: 0.75, emissive: '#100830', emissiveIntensity: 0.8 })
 );
 contactSphere.castShadow = true;
 contactSphere.receiveShadow = true;
 contactGroup.add(contactSphere);
 
-const orbitMat = new THREE.MeshStandardMaterial({ color: '#fc5c9c', metalness: 0.9, roughness: 0.1, emissive: '#200810', emissiveIntensity: 0.9 });
+const orbitMat = new THREE.MeshStandardMaterial({ color: COL.accent3, metalness: 0.9, roughness: 0.1, emissive: '#200810', emissiveIntensity: 0.9 });
 const contactOrbit = new THREE.Mesh(new THREE.TorusGeometry(1.25, 0.03, 32, 200), orbitMat);
 contactOrbit.rotation.x = Math.PI / 2;
 contactOrbit.castShadow = true;
@@ -215,18 +233,20 @@ contactOrbit2.rotation.y = Math.PI / 4;
 contactOrbit2.castShadow = true;
 contactGroup.add(contactOrbit2);
 
+// --- Partikel debu ---
 const dustGeo = new THREE.BufferGeometry();
 const dustCount = 600;
 const dustPositions = new Float32Array(dustCount * 3);
 for (let i = 0; i < dustCount; i++) {
-    dustPositions[i * 3] = (Math.random() - 0.5) * 15;
-    dustPositions[i * 3 + 1] = Math.random() * 6.8 - 2.3;
-    dustPositions[i * 3 + 2] = (Math.random() - 0.5) * 17;
+    dustPositions[i * 3] = (Math.random() - 0.5) * roomWidth;
+    dustPositions[i * 3 + 1] = Math.random() * roomHeight - 2.3;
+    dustPositions[i * 3 + 2] = (Math.random() - 0.5) * roomDepth;
 }
 dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPositions, 3));
 const dustParticles = new THREE.Points(dustGeo, new THREE.PointsMaterial({ size: 0.028, color: '#b8b8ff', blending: THREE.AdditiveBlending, depthWrite: false, transparent: true, opacity: 0.6 }));
 scene.add(dustParticles);
 
+// ==================== KAMERA TARGET PER TAB ====================
 const cameraTargets = {
     home: { pos: new THREE.Vector3(0, 1.1, 6.5), look: new THREE.Vector3(0, 0.9, 0) },
     works: { pos: new THREE.Vector3(4.8, 1.8, 5.5), look: new THREE.Vector3(4.8, 1.1, 2.2) },
@@ -236,18 +256,48 @@ const cameraTargets = {
 
 let activeTab = 'home';
 
-const mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
-document.addEventListener('mousemove', (e) => {
-    mouse.targetX = (e.clientX / window.innerWidth) * 2 - 1;
-    mouse.targetY = -(e.clientY / window.innerHeight) * 2 + 1;
-});
+// ==================== VISIBILITAS GRUP BERDASARKAN TAB ====================
+const groupsForTab = {
+    home: [podiumGroup],
+    works: [projectsGroup],
+    stack: [skillsGroup],
+    journey: [contactGroup],
+};
 
+function setVisibleGroups(tab) {
+    // Sembunyikan semua grup dulu
+    [podiumGroup, projectsGroup, skillsGroup, contactGroup].forEach(g => g.visible = false);
+    // Tampilkan yang sesuai
+    if (groupsForTab[tab]) {
+        groupsForTab[tab].forEach(g => g.visible = true);
+    }
+}
+setVisibleGroups(activeTab);
+
+// ==================== MOUSE / SENTUH PARALLAX ====================
+const mouse = { x: 0, y: 0, targetX: 0, targetY: 0, enabled: !isMobile };
+
+if (!isMobile) {
+    document.addEventListener('mousemove', (e) => {
+        mouse.targetX = (e.clientX / window.innerWidth) * 2 - 1;
+        mouse.targetY = -(e.clientY / window.innerHeight) * 2 + 1;
+    });
+}
+
+// ==================== RESIZE (DENGAN DEBOUNCE) ====================
+let resizeTimer;
 window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        // Perbarui juga pixel ratio jika perlu (mobile vs desktop)
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 2 : 2.5));
+    }, 150);
 });
 
+// ==================== NAVIGASI TAB ====================
 const navButtons = document.querySelectorAll('.nav-btn');
 const tabContents = document.querySelectorAll('.tab-content');
 
@@ -267,17 +317,34 @@ navButtons.forEach(btn => {
         });
 
         activeTab = targetId;
+        setVisibleGroups(activeTab);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 });
 
+// ==================== TOMBOL KEMBALI KE ATAS ====================
+const backToTopBtn = document.getElementById('back-to-top');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+        backToTopBtn.style.display = 'flex';
+    } else {
+        backToTopBtn.style.display = 'none';
+    }
+});
+backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// ==================== ANIMASI LOOP ====================
 const clock = new THREE.Clock();
 function animate() {
     const dt = Math.min(clock.getDelta(), 0.1);
     const elapsed = clock.elapsedTime;
 
-    mouse.x += (mouse.targetX - mouse.x) * 3.5 * dt;
-    mouse.y += (mouse.targetY - mouse.y) * 3.5 * dt;
+    if (mouse.enabled) {
+        mouse.x += (mouse.targetX - mouse.x) * 3.5 * dt;
+        mouse.y += (mouse.targetY - mouse.y) * 3.5 * dt;
+    }
 
     heroObj.rotation.x += 0.3 * dt;
     heroObj.rotation.y += 0.45 * dt;
@@ -307,10 +374,13 @@ function animate() {
     const targetPos = target.pos.clone();
     const targetLook = target.look.clone();
 
-    targetPos.x += mouse.x * 0.65;
-    targetPos.y += mouse.y * 0.35;
-    targetLook.x += mouse.x * 0.3;
-    targetLook.y += mouse.y * 0.25;
+    // Hanya gunakan mouse parallax jika bukan sentuh
+    if (mouse.enabled) {
+        targetPos.x += mouse.x * 0.65;
+        targetPos.y += mouse.y * 0.35;
+        targetLook.x += mouse.x * 0.3;
+        targetLook.y += mouse.y * 0.25;
+    }
 
     camera.position.lerp(targetPos, 2.5 * dt);
     const currentLook = new THREE.Vector3();
