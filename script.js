@@ -427,13 +427,13 @@ musicPlayBtn.addEventListener('click', () => {
     if (isMusicPlaying) {
         bgMusic.pause();
         musicPlayBtn.textContent = '▶️';
-        musicTitle.textContent = 'Lo-Fi Chill (Paused)';
+        musicTitle.textContent = 'beauty and a beat (Paused)';
     } else {
         bgMusic.play().catch(() => {
             alert('Klik lagi untuk mulai musik 🎵');
         });
         musicPlayBtn.textContent = '⏸️';
-        musicTitle.textContent = 'Lo-Fi Chill';
+        musicTitle.textContent = 'beauty and a beat';
     }
     isMusicPlaying = !isMusicPlaying;
 });
