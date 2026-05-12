@@ -7,17 +7,8 @@
     <link rel="icon" href="https://files.catbox.moe/y4ejg2.jpeg" />
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
-    <script type="importmap">
-        {
-            "imports": {
-                "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
-            }
-        }
-    </script>
 </head>
 <body>
-    <canvas id="three-canvas" aria-hidden="true"></canvas>
-
     <div class="main-wrapper">
         <div class="floating-nav">
             <button class="nav-btn active" data-target="home" aria-label="Ke halaman Home">Home</button>
@@ -25,11 +16,6 @@
             <button class="nav-btn" data-target="journey" aria-label="Ke halaman Journey">Journey</button>
             <button class="nav-btn" data-target="tools" aria-label="Ke halaman Tools">Tools</button>
         </div>
-<!-- ==================== MODE REDUCE MOTION TOGGLE ==================== -->
-<button id="motion-toggle" aria-label="Toggle reduce motion" title="Reduce Motion">
-    <span class="motion-icon">✨</span>
-</button>
-
 <!-- ==================== CUSTOM CURSOR ==================== -->
 <div id="custom-cursor" aria-hidden="true"></div>
 
@@ -53,7 +39,7 @@
 </audio>
         <div class="container">
             <!-- HOME -->
-            <div id="home" class="tab-content active">
+            <div id="home" class="page-section">
                 <h1 class="page-title">ENJI.<br /><span>Bukan dev.</span></h1>
                 <div class="bento">
                     <div class="card span-2">
@@ -81,7 +67,7 @@
             </div>
 
             <!-- PROJECT -->
-            <div id="project" class="tab-content">
+            <div id="project" class="page-section">
                 <h1 class="page-title">PROJECT<br /><span>WEB & DESAIN.</span></h1>
                 <div class="bento project-layout">
                     <div class="card span-2 project-hero-card">
@@ -196,38 +182,8 @@
                 </div>
             </div>
 
-            <!-- TOOLS -->
-            <div id="tools" class="tab-content">
-                <h1 class="page-title">TOOLS<br /><span>& SETUP.</span></h1>
-                <div class="bento">
-                    <div class="card">
-                        <p class="tag">Languages</p>
-                        <div class="badge-container">
-                            <span class="badge">PHP</span>
-                            <span class="badge">JavaScript</span>
-                            <span class="badge">CSS / Tailwind</span>
-                            <span class="badge">HTML5</span>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <p class="tag">Tools</p>
-                        <div class="badge-container">
-                            <span class="badge">VS Code</span>
-                            <span class="badge">Vercel</span>
-                            <span class="badge">GitHub</span>
-                            <span class="badge">Figma</span>
-                        </div>
-                    </div>
-                    <div class="card span-2">
-                        <p class="tag">Daily Setup</p>
-                        <h2 style="font-family: var(--font-heading);">Samsung J7 Pro + Golda + Music.</h2>
-                        <p class="intro-text">Kreativitas tidak terbatas pada perangkat keras. Fokus pada logika, bukan estetika meja kerja.</p>
-                    </div>
-                </div>
-            </div>
-
             <!-- JOURNEY -->
-            <div id="journey" class="tab-content">
+            <div id="journey" class="page-section">
                 <h1 class="page-title">TIMELINE<br /><span>& CERTS.</span></h1>
                 <div class="bento">
                     <div class="card span-2">
@@ -267,12 +223,43 @@
                     </div>
                 </div>
             </div>
+
+            <!-- TOOLS -->
+            <div id="tools" class="page-section">
+                <h1 class="page-title">TOOLS<br /><span>& SETUP.</span></h1>
+                <div class="bento">
+                    <div class="card">
+                        <p class="tag">Languages</p>
+                        <div class="badge-container">
+                            <span class="badge">PHP</span>
+                            <span class="badge">JavaScript</span>
+                            <span class="badge">CSS / Tailwind</span>
+                            <span class="badge">HTML5</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <p class="tag">Tools</p>
+                        <div class="badge-container">
+                            <span class="badge">VS Code</span>
+                            <span class="badge">Vercel</span>
+                            <span class="badge">GitHub</span>
+                            <span class="badge">Figma</span>
+                        </div>
+                    </div>
+                    <div class="card span-2">
+                        <p class="tag">Daily Setup</p>
+                        <h2 style="font-family: var(--font-heading);">Samsung J7 Pro + Golda + Music.</h2>
+                        <p class="intro-text">Kreativitas tidak terbatas pada perangkat keras. Fokus pada logika, bukan estetika meja kerja.</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
     <!-- Tombol kembali ke atas -->
     <button id="back-to-top" aria-label="Kembali ke atas">↑</button>
 
-    <script type="module" src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
