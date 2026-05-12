@@ -249,8 +249,8 @@ scene.add(dustParticles);
 // ==================== KAMERA TARGET PER TAB ====================
 const cameraTargets = {
     home: { pos: new THREE.Vector3(0, 1.1, 6.5), look: new THREE.Vector3(0, 0.9, 0) },
-    works: { pos: new THREE.Vector3(4.8, 1.8, 5.5), look: new THREE.Vector3(4.8, 1.1, 2.2) },
-    stack: { pos: new THREE.Vector3(-4.8, 2.0, 5.5), look: new THREE.Vector3(-4.8, 0.9, 2.8) },
+    project: { pos: new THREE.Vector3(4.8, 1.8, 5.5), look: new THREE.Vector3(4.8, 1.1, 2.2) },
+    tools: { pos: new THREE.Vector3(-4.8, 2.0, 5.5), look: new THREE.Vector3(-4.8, 0.9, 2.8) },
     journey: { pos: new THREE.Vector3(0, 0.9, 7.5), look: new THREE.Vector3(0, 0.3, -4.5) },
 };
 
@@ -259,8 +259,8 @@ let activeTab = 'home';
 // ==================== VISIBILITAS GRUP BERDASARKAN TAB ====================
 const groupsForTab = {
     home: [podiumGroup],
-    works: [projectsGroup],
-    stack: [skillsGroup],
+    project: [projectsGroup],
+    tools: [skillsGroup],
     journey: [contactGroup],
 };
 
@@ -378,7 +378,7 @@ if (!isMobile) {
         cursor.style.top = e.clientY + 'px';
     });
 
-    const hoverTargets = document.querySelectorAll('a, button, .nav-btn, .list-item, .social-link, .badge, #back-to-top, #motion-toggle');
+    const hoverTargets = document.querySelectorAll('a, button, .nav-btn, .project-link-card, .design-card, .social-link, .badge, #back-to-top, #motion-toggle');
 
     hoverTargets.forEach(el => {
         el.addEventListener('mouseenter', () => {
