@@ -42,7 +42,7 @@
             position: relative;
         }
 
-        /* Carbon Fiber Pattern (tetap) */
+        /* Carbon Fiber Pattern */
         body::before {
             content: '';
             position: fixed;
@@ -117,16 +117,20 @@
         .header.scrolled { background: rgba(18,18,18,0.98); backdrop-filter: blur(30px); box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
         .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; }
         .logo { display: flex; align-items: center; text-decoration: none; }
-        .logo-icon { width: 40px; height: 40px; margin-right: 12px; }
-        .logo-prism { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
-        .prism-shape {
-            width: 28px; height: 28px; position: relative; transform: rotate(45deg);
-            background: linear-gradient(135deg, var(--accent-red), var(--accent-blue), var(--accent-green), var(--accent-purple));
-            animation: prismShine 3s ease-in-out infinite;
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 12px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--accent-purple);
+            box-shadow: 0 0 8px rgba(153,69,255,0.5);
         }
-        @keyframes prismShine {
-            0%,100% { filter: brightness(1) hue-rotate(0deg); transform: rotate(45deg) scale(1); }
-            50% { filter: brightness(1.5) hue-rotate(10deg); transform: rotate(45deg) scale(1.1); }
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
         .logo-text { font-size: 20px; font-weight: 900; letter-spacing: 1px; }
         .logo-text .prism { background: linear-gradient(135deg, var(--text-primary), var(--accent-cyan)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
@@ -373,7 +377,7 @@
             font-size: 16px;
             line-height: 1.6;
             color: var(--text-secondary);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         .about-signature {
             font-family: 'Orbitron', monospace;
@@ -522,10 +526,22 @@
         .footer-brand { max-width: 280px; }
         .footer-social { display: flex; gap: 12px; margin-top: 15px; }
         .social-icon {
-            width: 38px; height: 38px;
-            background: var(--carbon-medium); border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            text-decoration: none; color: var(--text-secondary);
+            width: 38px;
+            height: 38px;
+            background: var(--carbon-medium);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+        .social-icon:hover {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            color: white;
+            transform: translateY(-3px);
         }
         .footer-bottom { margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--metal-dark); display: flex; flex-wrap: wrap; justify-content: space-between; font-size: 13px; }
 
@@ -541,7 +557,7 @@
             font-size: 40px; color: white; cursor: pointer;
         }
 
-        /* ========== RESPONSIVE UTAMA ========== */
+        /* Responsive */
         @media (max-width: 1024px) {
             .certificates-grid { grid-template-columns: repeat(2,1fr); }
             .hero-content h1 { font-size: 52px; }
@@ -598,7 +614,13 @@
 <div class="loader" id="loader"><div class="loader-content"><div class="loader-prism"><div class="prism-face"></div><div class="prism-face"></div><div class="prism-face"></div></div><div style="color: var(--accent-purple);">Loading</div></div></div>
 
 <header class="header" id="header">
-    <nav class="nav-container"><a href="#home" class="logo"><div class="logo-icon"><div class="logo-prism"><div class="prism-shape"></div></div></div><span class="logo-text"><span class="prism">ENJI</span><span class="flux">SPECTRUM</span></span></a>
+    <nav class="nav-container">
+        <a href="#home" class="logo">
+            <div class="logo-icon">
+                <img src="https://i.ibb.co.com/tTptHpks/From-Klick-Pin-CF-Wise-healing-words-for-people-who-love-practical-beauty-for-thoughtful-sharing-to.jpg" alt="Foto Enji">
+            </div>
+            <span class="logo-text"><span class="prism">ENJI</span><span class="flux">NotDev</span></span>
+        </a>
         <ul class="nav-menu" id="navMenu">
             <li><a href="#home" class="nav-link active">Home</a></li>
             <li><a href="#about" class="nav-link">About</a></li>
@@ -614,7 +636,7 @@
 <!-- Hero -->
 <section class="hero" id="home">
     <div class="hero-content">
-        <h1>ENJI<span class="flux">SPECTRUM</span></h1>
+        <h1>ENJI<span class="flux">NotDev</span></h1>
         <p class="hero-tagline">Creative Frontend Explorer // Membangun Pengalaman Digital</p>
     </div>
 </section>
@@ -623,7 +645,11 @@
 <section class="about-section" id="about">
     <div class="about-container">
         <div class="about-image"><img class="profile-photo" src="https://i.ibb.co.com/tTptHpks/From-Klick-Pin-CF-Wise-healing-words-for-people-who-love-practical-beauty-for-thoughtful-sharing-to.jpg" alt="Foto Enji"></div>
-        <div class="about-text"><h2>Enji</h2><p> Halo, saya Enang atau Enji (di dunia virtual). Aku lahir di Pemalang pada tanggal 22-03-2007 jika sekarang (2026) berarti sudah 19 tahun. Aku seorang santri sekaligus siswa SMK Jabal Toriq Boarding School, disana aku menjalani kehidupan seperti santri pada umum nya (ga cium" kaki kyai/hal buruk tentang santri di medsos ye anti disini mah, religius boleh goblok jangan). Aku sekarang tinggal di Kota cirebon jl.pilang raya yuu mampir gw sediain kopi nanti.</p><div class="about-signature">✦SiEnji✦</div></div>
+        <div class="about-text">
+            <h2>Enji</h2>
+            <p> Halo, saya Enang atau Enji (di dunia virtual). Aku lahir di Pemalang pada tanggal 22-03-2007 jika sekarang (2026) berarti sudah 19 tahun. Aku seorang santri sekaligus siswa SMK Jabal Toriq Boarding School, disana aku menjalani kehidupan seperti santri pada umum nya (ga cium" kaki kyai/hal buruk tentang santri di medsos ye anti disini mah, religius boleh goblok jangan). Aku sekarang tinggal di Kota cirebon jl.pilang raya yuu mampir gw sediain kopi nanti.</p>
+            <div class="about-signature">✦SiEnji✦</div>
+        </div>
     </div>
 </section>
 
@@ -642,10 +668,31 @@
 <!-- Contact -->
 <section class="contact-section" id="contact"><div class="section-header"><h2 class="section-title">Initialize Connection</h2><p class="section-subtitle">Siap berkolaborasi? Kirim pesan langsung</p></div><div class="contact-container"><div class="contact-info"><div class="info-item"><div class="info-icon">📍</div><div class="info-text"><h4>Lokasi</h4><p>Indonesia / Digital Nomad</p></div></div><a href="mailto:enji@prismflux.me" class="info-item"><div class="info-icon">📧</div><div class="info-text"><h4>Email</h4><p>enji@prismflux.me</p></div></a><a href="https://github.com/enji" target="_blank" class="info-item"><div class="info-icon">🐙</div><div class="info-text"><h4>GitHub</h4><p>/enji-creative</p></div></a><div class="info-item"><div class="info-icon">💬</div><div class="info-text"><h4>Respon Cepat</h4><p>Biasanya dalam 24 jam</p></div></div></div><form class="contact-form" id="contactForm"><div class="form-group"><label>Nama</label><input type="text" name="name" required></div><div class="form-group"><label>Email</label><input type="email" name="email" required></div><div class="form-group"><label>Subjek</label><input type="text" name="subject" required></div><div class="form-group"><label>Pesan</label><textarea name="message" required></textarea></div><button type="submit" class="submit-btn">Kirim Pesan</button></form></div></section>
 
-<footer class="footer"><div class="footer-content"><div class="footer-brand"><div class="footer-logo" style="display:flex;align-items:center;"><div class="logo-icon"><div class="logo-prism"><div class="prism-shape"></div></div></div><span class="logo-text"><span class="prism">ENJI</span><span class="flux">SPECTRUM</span></span></div><p class="footer-description">Membangun pengalaman digital yang reflektif dan berwarna.</p><div class="footer-social"><a href="#" class="social-icon">ig</a><a href="#" class="social-icon">tw</a><a href="#" class="social-icon">gh</a></div></div></div><div class="footer-bottom"><div class="copyright">© 2026 Enji Spectrum — creative frontend journey</div><div class="footer-credits">Didesain dengan 💜 oleh Enji</div></div></footer>
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-brand">
+            <div class="footer-logo" style="display:flex;align-items:center;">
+                <div class="logo-icon" style="margin-right:12px;">
+                    <img src="https://i.ibb.co.com/tTptHpks/From-Klick-Pin-CF-Wise-healing-words-for-people-who-love-practical-beauty-for-thoughtful-sharing-to.jpg" alt="Enji">
+                </div>
+                <span class="logo-text"><span class="prism">ENJI</span><span class="flux">SPECTRUM</span></span>
+            </div>
+            <p class="footer-description">Membangun pengalaman digital yang reflektif dan berwarna.</p>
+            <div class="footer-social">
+                <a href="https://instagram.com/enji_spectrum" target="_blank" class="social-icon">📷</a>
+                <a href="https://wa.me/6281234567890" target="_blank" class="social-icon">💬</a>
+                <a href="https://github.com/enji" target="_blank" class="social-icon">🐙</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="copyright">© 2026 Enji Spectrum — creative frontend journey</div>
+        <div class="footer-credits">Didesain dengan 💜 oleh Enji</div>
+    </div>
+</footer>
 
 <script>
-    // Data portfolio, skills, certificates (sama seperti sebelumnya)
+    // Data portfolio, skills, certificates
     const skillsData = [
         { name: 'Canva', icon: '🎨', level: 50, category: 'design' },
         { name: 'HTML', icon: '🏗️', level: 60, category: 'frontend' },
