@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Enji // Portofolio</title>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* ========== SEMUA CSS SAMA PERSIS SEPERTI KODE ANDA ========== */
@@ -127,7 +128,7 @@
 <header class="header" id="header">
     <nav class="nav-container">
         <a href="#home" class="logo">
-            <div class="logo-icon"><img src="https://i.ibb.co.com/tTptHpks/From-Klick-Pin-CF-Wise-healing-words-for-people-who-love-practical-beauty-for-thoughtful-sharing-to.jpg" alt="Foto Enji"></div>
+            <div class="logo-icon"><img src="https://i.ibb.co.com/YFzKvBnk/Desain-tanpa-judul.png" alt="Foto Enji"></div>
             <span class="logo-text"><span class="prism">ENJI</span><span class="flux">NotDev</span></span>
         </a>
         <ul class="nav-menu" id="navMenu">
@@ -150,7 +151,7 @@
 <!-- About -->
 <section class="about-section" id="about">
     <div class="about-container">
-        <div class="about-image"><img class="profile-photo" src="https://i.ibb.co.com/tTptHpks/From-Klick-Pin-CF-Wise-healing-words-for-people-who-love-practical-beauty-for-thoughtful-sharing-to.jpg" alt="Foto Enji"></div>
+        <div class="about-image"><img class="profile-photo" src="https://i.ibb.co.com/YFzKvBnk/Desain-tanpa-judul.png" alt="Foto Enji"></div>
         <div class="about-text"><h2>Enji</h2><p> Halo, saya Enang atau Enji (di dunia virtual). Aku lahir di Pemalang pada tanggal 22-03-2007 jika sekarang (2026) berarti sudah 19 tahun. Aku seorang santri sekaligus siswa SMK Jabal Toriq Boarding School, disana aku menjalani kehidupan seperti santri pada umum nya (ga cium" kaki kyai/hal buruk tentang santri di medsos ye anti disini mah, religius boleh goblok jangan). Aku sekarang tinggal di Kota cirebon jl.pilang raya yuu mampir gw sediain kopi nanti.</p><div class="about-signature">✦SiEnji✦</div></div>
     </div>
 </section>
@@ -173,7 +174,7 @@
 <footer class="footer">
     <div class="footer-content">
         <div class="footer-brand">
-            <div class="footer-logo" style="display:flex;align-items:center;"><div class="logo-icon" style="margin-right:12px;"><img src="https://i.ibb.co.com/tTptHpks/From-Klick-Pin-CF-Wise-healing-words-for-people-who-love-practical-beauty-for-thoughtful-sharing-to.jpg" alt="Enji"></div><span class="logo-text"><span class="prism">ENJI</span><span class="flux">?</span></span></div>
+            <div class="footer-logo" style="display:flex;align-items:center;"><div class="logo-icon" style="margin-right:12px;"><img src="https://i.ibb.co.com/YFzKvBnk/Desain-tanpa-judul.png" alt="Enji"></div><span class="logo-text"><span class="prism">ENJI</span><span class="flux">?</span></span></div>
             <p class="footer-description">cuma anak biasa.</p>
             <div class="footer-social"><a href="https://instagram.com/fpeople___" target="_blank" class="social-icon">📷</a><a href="https://wa.me/6283199503146" target="_blank" class="social-icon">💬</a><a href="https://github.com/nji-f" target="_blank" class="social-icon">🐙</a></div>
         </div>
@@ -244,13 +245,109 @@
         } catch (error) { console.error(error); alert('Terjadi kesalahan jaringan. Periksa koneksi internet Anda.'); }
     });
 
-    // ========== PERBAIKAN UTAMA: NAVIGASI AKTIF SAAT SCROLL ==========
+    // ========== MEMPERBAIKI NAVIGASI DAN MENGHAPUS TANDA PAGAR (#) DARI URL ==========
+    
+    // Fungsi untuk menghapus hash (#) dari URL tanpa memuat ulang halaman
+    function removeHashFromUrl() {
+        const currentUrl = window.location.href;
+        if (currentUrl.includes('#')) {
+            const cleanUrl = currentUrl.split('#')[0];
+            // Ganti URL di address bar tanpa memuat ulang halaman
+            window.history.replaceState({}, document.title, cleanUrl);
+        }
+    }
+
+    // Fungsi untuk menavigasi ke section tertentu dan memperbarui URL tanpa hash
+    function navigateToSection(sectionId) {
+        const targetElement = document.getElementById(sectionId);
+        if (targetElement) {
+            // Scroll ke section dengan offset untuk header fixed
+            const headerOffset = 70;
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+            
+            // Update URL tanpa hash menggunakan History API
+            const baseUrl = window.location.href.split('#')[0].split('?')[0];
+            const newUrl = `${baseUrl}${sectionId === 'home' ? '' : '/' + sectionId}`;
+            window.history.pushState({ section: sectionId }, '', newUrl);
+            
+            // Update active class pada menu
+            updateActiveNavOnSection(sectionId);
+        }
+    }
+    
+    // Fungsi untuk update active class berdasarkan section yang sedang aktif
+    function updateActiveNavOnSection(sectionId) {
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            const href = link.getAttribute('href').substring(1);
+            if (href === sectionId) {
+                link.classList.add('active');
+            }
+        });
+    }
+    
+    // Fungsi untuk mendeteksi section berdasarkan URL path
+    function getSectionFromPath() {
+        const path = window.location.pathname;
+        if (path === '/' || path === '') return 'home';
+        const section = path.substring(1); // hapus leading slash
+        const validSections = ['about', 'projects', 'skills', 'certificates', 'contact'];
+        return validSections.includes(section) ? section : 'home';
+    }
+    
+    // Fungsi untuk scroll ke section berdasarkan URL saat halaman dimuat
+    function scrollToSectionFromUrl() {
+        const sectionId = getSectionFromPath();
+        if (sectionId !== 'home') {
+            const targetElement = document.getElementById(sectionId);
+            if (targetElement) {
+                setTimeout(() => {
+                    const headerOffset = 70;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                    updateActiveNavOnSection(sectionId);
+                }, 100);
+            }
+        } else {
+            updateActiveNavOnSection('home');
+        }
+    }
+    
+    // Event listener untuk navigasi browser (tombol back/forward)
+    window.addEventListener('popstate', (event) => {
+        scrollToSectionFromUrl();
+    });
+    
+    // Event handler untuk klik pada menu navigasi
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const sectionId = link.getAttribute('href').substring(1);
+            navigateToSection(sectionId);
+        });
+    });
+    
+    // Hapus hash dari URL saat halaman dimuat
+    removeHashFromUrl();
+    
+    // Scroll ke section yang sesuai berdasarkan URL
+    scrollToSectionFromUrl();
+
+    // Event scroll untuk update active class (fallback)
     function updateActiveNavOnScroll() {
         const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-link');
-        let currentActiveId = '';
-        const scrollPosition = window.scrollY + 150; // offset karena header fixed
-
+        const scrollPosition = window.scrollY + 150;
+        let currentActiveId = 'home';
+        
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionBottom = sectionTop + section.offsetHeight;
@@ -258,17 +355,24 @@
                 currentActiveId = section.getAttribute('id');
             }
         });
-
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            const href = link.getAttribute('href').substring(1);
-            if (href === currentActiveId) {
-                link.classList.add('active');
+        
+        updateActiveNavOnSection(currentActiveId);
+        
+        // Update URL jika perlu (opsional)
+        const currentPath = window.location.pathname.substring(1);
+        if (currentActiveId !== 'home' && currentPath !== currentActiveId) {
+            const newUrl = window.location.href.split('#')[0].split('?')[0].split('/')[0] + 
+                          (currentActiveId === 'home' ? '' : '/' + currentActiveId);
+            if (window.location.pathname !== newUrl) {
+                window.history.replaceState({ section: currentActiveId }, '', newUrl);
             }
-        });
+        } else if (currentActiveId === 'home' && currentPath !== '') {
+            const baseUrl = window.location.href.split('#')[0].split('?')[0];
+            window.history.replaceState({ section: 'home' }, '', baseUrl);
+        }
     }
-
-    // Event listener scroll dengan requestAnimationFrame untuk performa
+    
+    // Event scroll dengan requestAnimationFrame
     let ticking = false;
     window.addEventListener('scroll', () => {
         if (!ticking) {
@@ -278,15 +382,6 @@
             });
             ticking = true;
         }
-    });
-
-    // Event load juga
-    window.addEventListener('load', () => {
-        updateActiveNavOnScroll();
-        setTimeout(() => { document.getElementById('loader').classList.add('hidden'); }, 1000);
-        initCarousel();
-        initSkillsGrid();
-        initCertificates();
     });
 
     // Header scrolled effect
@@ -305,6 +400,14 @@
             menuToggle.classList.toggle('active');
         });
     }
+
+    // Loader dan inisialisasi
+    window.addEventListener('load', () => {
+        setTimeout(() => { document.getElementById('loader').classList.add('hidden'); }, 1000);
+        initCarousel();
+        initSkillsGrid();
+        initCertificates();
+    });
 </script>
 </body>
 </html>
