@@ -738,8 +738,34 @@
     // Skills
     function initSkillsGrid(){ const grid=document.getElementById('skillsGrid'), catContainer=document.getElementById('dynamicCategories'); const cats=['all',...new Set(skillsData.map(s=>s.category))]; catContainer.innerHTML=''; cats.forEach(c=>{ let btn=document.createElement('div'); btn.className='category-tab'; btn.textContent=c==='all'?'All Skills':(c==='design'?'Design':'Frontend'); btn.dataset.category=c; if(c==='all')btn.classList.add('active'); btn.onclick=()=>{ document.querySelectorAll('.category-tab').forEach(t=>t.classList.remove('active')); btn.classList.add('active'); displaySkills(c); }; catContainer.appendChild(btn); }); function displaySkills(cat){ grid.innerHTML=''; let filtered=cat==='all'?skillsData:skillsData.filter(s=>s.category===cat); filtered.forEach(skill=>{ let hex=document.createElement('div'); hex.className='skill-hexagon'; hex.innerHTML=`<div class="hexagon-inner"><div class="hexagon-content"><div class="skill-icon-hex">${skill.icon}</div><div class="skill-name-hex">${skill.name}</div><div class="skill-level"><div class="skill-level-fill" style="width:${skill.level}%"></div></div><div class="skill-percentage-hex">${skill.level}%</div></div></div>`; grid.appendChild(hex); }); } displaySkills('all'); }
     function initCertificates(){ const grid=document.getElementById('certificatesGrid'); grid.innerHTML=''; certificatesData.forEach(c=>{ let card=document.createElement('div'); card.className='cert-card'; card.innerHTML=`<img class="cert-card-img" src="${c.image}" alt="${c.title}"><div class="cert-card-body"><div><h3 class="cert-card-title">${c.title}</h3><p class="cert-card-issuer">${c.issuer}</p></div><button class="cert-card-btn" onclick="openFullImage('${c.image}')">Lihat Full →</button></div>`; grid.appendChild(card); }); }
-    // Events & Loader
-    document.getElementById('contactForm').addEventListener('submit',(e)=>{ e.preventDefault(); alert(`Terima kasih ${e.target.name.value}! Pesanmu terkirim.`); e.target.reset(); });
+
+    // ========== FORM BERFUNGSI DENGAN FORMSUBMIT ==========
+    const contactForm = document.getElementById('contactForm');
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+        // Tambahkan parameter untuk FormSubmit
+        formData.append('_captcha', 'false');
+        formData.append('_subject', `Pesan dari ${formData.get('name')} - ${formData.get('subject')}`);
+        
+        try {
+            const response = await fetch('https://formsubmit.co/ajax/enjiww@proton.me', {
+                method: 'POST',
+                body: formData
+            });
+            if (response.ok) {
+                alert('Terima kasih! Pesan Anda telah terkirim. Saya akan membalas secepatnya.');
+                form.reset();
+            } else {
+                alert('Gagal mengirim pesan. Silakan coba lagi nanti.');
+            }
+        } catch (error) {
+            console.error(error);
+            alert('Terjadi kesalahan jaringan. Periksa koneksi internet Anda.');
+        }
+    });
+
     const menuToggle=document.getElementById('menuToggle'), navMenu=document.getElementById('navMenu'); menuToggle.onclick=()=>{ navMenu.classList.toggle('active'); menuToggle.classList.toggle('active'); };
     window.onscroll=()=>{ document.getElementById('header').classList.toggle('scrolled',window.scrollY>100); };
     window.addEventListener('load',()=>{ setTimeout(()=>{ document.getElementById('loader').classList.add('hidden'); },1000); initCarousel(); initSkillsGrid(); initCertificates(); });
