@@ -254,6 +254,85 @@
         .skill-level-fill { height: 100%; background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple)); border-radius: 2px; }
         .skill-percentage-hex { font-size: 14px; color: var(--text-secondary); margin-top: 8px; font-weight: 600; }
 
+        /* ========== CERTIFICATES SECTION ========== */
+        .certificates-section {
+            padding: 120px 30px;
+            background: linear-gradient(180deg, var(--primary-black) 0%, rgba(0,168,255,0.05) 50%, var(--primary-black) 100%);
+        }
+        .certificates-grid {
+            max-width: 1400px;
+            margin: 60px auto 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .cert-card {
+            background: linear-gradient(135deg, rgba(26,26,26,0.8), rgba(42,42,42,0.4));
+            border: 1px solid var(--metal-dark);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            flex-direction: column;
+        }
+        .cert-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 15px 40px rgba(0,168,255,0.2);
+        }
+        .cert-card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            border-bottom: 1px solid var(--metal-dark);
+        }
+        .cert-card-body {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .cert-card-title {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .cert-card-issuer {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        .cert-card-btn {
+            padding: 10px 20px;
+            background: transparent;
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            border-radius: 25px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s;
+            align-self: flex-start;
+            margin-top: 10px;
+        }
+        .cert-card-btn:hover {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 5px 15px rgba(0,168,255,0.4);
+        }
+
         /* Contact */
         .contact-section { padding: 120px 30px; background: linear-gradient(180deg, var(--carbon-dark) 0%, var(--primary-black) 100%); }
         .contact-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
@@ -330,7 +409,11 @@
             transform: scale(1.2);
         }
 
+        /* Responsive grid untuk sertifikat */
         @media (max-width: 1024px) {
+            .certificates-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
             .carousel-item { width: 350px; height: 480px; }
             .contact-container { grid-template-columns: 1fr; }
             .about-container { flex-direction: column; text-align: center; padding: 35px; }
@@ -342,6 +425,12 @@
             .carousel-item { width: 280px; height: 450px; }
             .about-text h2 { font-size: 32px; }
             .full-image-close { top: 20px; right: 30px; font-size: 36px; }
+            .certificates-grid {
+                grid-template-columns: 1fr;
+                max-width: 450px;
+                margin-left: auto;
+                margin-right: auto;
+            }
         }
     </style>
 </head>
@@ -350,7 +439,13 @@
 
 <header class="header" id="header">
     <nav class="nav-container"><a href="#home" class="logo"><div class="logo-icon"><div class="logo-prism"><div class="prism-shape"></div></div></div><span class="logo-text"><span class="prism">ENJI</span><span class="flux">SPECTRUM</span></span></a>
-        <ul class="nav-menu" id="navMenu"><li><a href="#home" class="nav-link active">Home</a></li><li><a href="#about" class="nav-link">About</a></li><li><a href="#skills" class="nav-link">Arsenal</a></li><li><a href="#contact" class="nav-link">Contact</a></li></ul>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="#home" class="nav-link active">Home</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#skills" class="nav-link">Arsenal</a></li>
+            <li><a href="#certificates" class="nav-link">Sertifikat</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
         <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
     </nav>
 </header>
@@ -379,6 +474,15 @@
     <div class="skills-hexagon-grid" id="skillsGrid"></div></div>
 </section>
 
+<!-- ========== CERTIFICATES SECTION ========== -->
+<section class="certificates-section" id="certificates">
+    <div class="section-header">
+        <h2 class="section-title">Sertifikat</h2>
+        <p class="section-subtitle">Bukti perjalanan belajar & kompetensi yang telah diraih</p>
+    </div>
+    <div class="certificates-grid" id="certificatesGrid"></div>
+</section>
+
 <section class="contact-section" id="contact"><div class="section-header"><h2 class="section-title">Initialize Connection</h2><p class="section-subtitle">Siap berkolaborasi? Kirim pesan langsung ke saya</p></div>
 <div class="contact-container"><div class="contact-info">
     <div class="info-item"><div class="info-icon">📍</div><div class="info-text"><h4>Lokasi</h4><p>Indonesia / Digital Nomad</p></div></div>
@@ -391,7 +495,7 @@
 <footer class="footer"><div class="footer-content"><div class="footer-brand"><div class="footer-logo"><div class="logo-icon"><div class="logo-prism"><div class="prism-shape"></div></div></div><span class="logo-text"><span class="prism">ENJI</span><span class="flux">SPECTRUM</span></span></div><p class="footer-description">Membangun pengalaman digital yang reflektif dan berwarna. Terus belajar, terus berkarya.</p><div class="footer-social"><a href="#" class="social-icon">ig</a><a href="#" class="social-icon">tw</a><a href="#" class="social-icon">gh</a></div></div></div><div class="footer-bottom"><div class="copyright">© 2026 Enji Spectrum — creative frontend journey</div><div class="footer-credits">Didesain dengan 💜 oleh Enji</div></div></footer>
 
 <script>
-    // ========== SKILLS DATA (sesuai permintaan) ==========
+    // ========== SKILLS DATA ==========
     const skillsData = [
         { name: 'Canva', icon: '🎨', level: 50, category: 'design' },
         { name: 'HTML', icon: '🏗️', level: 60, category: 'frontend' },
@@ -399,7 +503,7 @@
         { name: 'JavaScript', icon: '🟨', level: 30, category: 'frontend' }
     ];
 
-    // ========== PORTFOLIO CAROUSEL (proyek keren milik Enji) ==========
+    // ========== PORTFOLIO CAROUSEL DATA ==========
     const portfolioData = [
         {
             id: 1,
@@ -448,7 +552,7 @@
             title: 'project 03',
             description: 'website buat bikin chat ui iphone',
             image: 'images/project_03.png',
-            tech: ['JS', 'API integraton', 'HTML']
+            tech: ['JS', 'API integration', 'HTML']
         },
         {
             id: 8,
@@ -473,14 +577,24 @@
         }
     ];
 
-    // Carousel Global
-    let currentIndex = 0;
-    const carousel = document.getElementById('carousel');
-    const indicatorsContainer = document.getElementById('indicators');
+    // ========== CERTIFICATES DATA (12 sertifikat) ==========
+   const certificatesData = [
+    { title: 'Belajar Dasar Front-End', issuer: 'Dicoding Indonesia', image: 'https://i.ibb.co.com/3yX55R2F/Screenshot-2026-05-13-10-58-41-AM.png' },
+    { title: 'JavaScript Fundamentals', issuer: 'Progate', image: 'https://i.ibb.co.com/0VV4yJJ9/Screenshot-2026-05-13-10-58-31-AM.png' },
+    { title: 'Responsive Web Design', issuer: 'freeCodeCamp', image: 'https://i.ibb.co.com/0RY2Q3QG/Screenshot-2026-05-13-10-58-23-AM.png' },
+    { title: 'UI/UX Design Basics', issuer: 'Skillshare', image: 'https://i.ibb.co.com/35k4x6TK/Screenshot-2026-05-13-10-57-04-AM.png' },
+    { title: 'Git & Version Control', issuer: 'GitHub Learning Lab', image: 'https://i.ibb.co.com/rKm9XR4f/Screenshot-2026-05-13-10-56-43-AM.png' },
+    { title: 'CSS Advanced Layouts', issuer: 'Frontend Masters', image: 'https://i.ibb.co.com/qYHPh80c/Screenshot-2026-05-13-10-56-32-AM.png' },
+    { title: 'Web Performance Optimization', issuer: 'Google Devs', image: 'https://i.ibb.co.com/s90gWHGh/Screenshot-2026-05-13-10-56-25-AM.png' },
+    { title: 'Canva for Creators', issuer: 'Canva Design School', image: 'https://i.ibb.co.com/7Npgb9Cj/Screenshot-2026-05-13-10-56-20-AM.png' },
+    { title: 'Problem Solving (Basic)', issuer: 'HackerRank', image: 'https://i.ibb.co.com/yn132Dht/Screenshot-2026-05-13-10-56-14-AM.png' },
+    { title: 'Intro to APIs', issuer: 'Postman Academy', image: 'https://i.ibb.co.com/vCP8mRrJ/Screenshot-2026-05-13-10-56-07-AM.png' },
+    { title: 'Web Security Basics', issuer: 'Mozilla', image: 'https://i.ibb.co.com/yFLRM8Gk/Screenshot-2026-05-13-10-55-27-AM.png' },
+    { title: 'Creative Coding', issuer: 'Processing Foundation', image: 'https://i.ibb.co.com/0y5BDW1z/Screenshot-2026-05-13-10-55-19-AM.png' }
+];
 
-    // ========== FULL IMAGE FUNCTION ==========
+    // ========== FULL IMAGE OVERLAY (digunakan di carousel & sertifikat) ==========
     function openFullImage(imageSrc) {
-        // Hapus overlay lama jika ada (jaga-jaga double click)
         const existing = document.querySelector('.full-image-overlay');
         if (existing) existing.remove();
 
@@ -492,15 +606,11 @@
         `;
         document.body.appendChild(overlay);
 
-        // Tutup via tombol close
         overlay.querySelector('.full-image-close').addEventListener('click', () => overlay.remove());
-
-        // Tutup jika klik di luar gambar (area overlay)
         overlay.addEventListener('click', (e) => {
             if (e.target === overlay) overlay.remove();
         });
 
-        // Opsional: tutup dengan tombol ESC
         function escHandler(e) {
             if (e.key === 'Escape') {
                 overlay.remove();
@@ -510,11 +620,37 @@
         document.addEventListener('keydown', escHandler);
     }
 
+    // ========== RENDER CERTIFICATES GRID ==========
+    function initCertificatesGrid() {
+        const grid = document.getElementById('certificatesGrid');
+        if (!grid) return;
+        grid.innerHTML = '';
+        certificatesData.forEach(cert => {
+            const card = document.createElement('div');
+            card.className = 'cert-card';
+            card.innerHTML = `
+                <img class="cert-card-img" src="${cert.image}" alt="${cert.title}" />
+                <div class="cert-card-body">
+                    <div>
+                        <h3 class="cert-card-title">${cert.title}</h3>
+                        <p class="cert-card-issuer">${cert.issuer}</p>
+                    </div>
+                    <button class="cert-card-btn" onclick="openFullImage('${cert.image}')">Lihat Full →</button>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    // ========== CAROUSEL ==========
+    let currentIndex = 0;
+    const carousel = document.getElementById('carousel');
+    const indicatorsContainer = document.getElementById('indicators');
+
     function createCarouselItem(data) {
-        const item = document.createElement('div'); 
+        const item = document.createElement('div');
         item.className = 'carousel-item';
         const techBadges = data.tech.map(t => `<span class="tech-badge">${t}</span>`).join('');
-        // Tombol Lihat Full → memanggil openFullImage dengan gambar dari data
         item.innerHTML = `
             <div class="card">
                 <div class="card-image">
@@ -529,14 +665,14 @@
     }
 
     function initCarousel() {
-        portfolioData.forEach((data, idx) => { 
-            carousel.appendChild(createCarouselItem(data)); 
-            const ind = document.createElement('div'); 
-            ind.className = 'indicator'; 
-            if(idx === 0) ind.classList.add('active'); 
-            ind.dataset.index = idx; 
-            ind.addEventListener('click', () => goToSlide(idx)); 
-            indicatorsContainer.appendChild(ind); 
+        portfolioData.forEach((data, idx) => {
+            carousel.appendChild(createCarouselItem(data));
+            const ind = document.createElement('div');
+            ind.className = 'indicator';
+            if (idx === 0) ind.classList.add('active');
+            ind.dataset.index = idx;
+            ind.addEventListener('click', () => goToSlide(idx));
+            indicatorsContainer.appendChild(ind);
         });
         updateCarousel();
     }
@@ -552,25 +688,22 @@
             if (offset > total/2) offset -= total;
             if (offset < -total/2) offset += total;
             const abs = Math.abs(offset);
-            if (abs === 0) { 
-                item.style.transform = 'translate(-50%, -50%) translateZ(0) scale(1)'; 
-                item.style.opacity = '1'; 
-                item.style.zIndex = '10'; 
-            }
-            else if (abs === 1) { 
-                item.style.transform = `translate(-50%, -50%) translateX(${offset * spacing}px) translateZ(-200px) rotateY(${-offset * 30}deg) scale(0.85)`; 
-                item.style.opacity = '0.8'; 
-                item.style.zIndex = '5'; 
-            }
-            else if (abs === 2) { 
-                item.style.transform = `translate(-50%, -50%) translateX(${offset * (spacing+80)}px) translateZ(-350px) rotateY(${-offset * 40}deg) scale(0.7)`; 
-                item.style.opacity = '0.5'; 
-                item.style.zIndex = '3'; 
-            }
-            else { 
-                item.style.transform = 'translate(-50%, -50%) translateZ(-500px) scale(0.5)'; 
-                item.style.opacity = '0'; 
-                item.style.zIndex = '1'; 
+            if (abs === 0) {
+                item.style.transform = 'translate(-50%, -50%) translateZ(0) scale(1)';
+                item.style.opacity = '1';
+                item.style.zIndex = '10';
+            } else if (abs === 1) {
+                item.style.transform = `translate(-50%, -50%) translateX(${offset * spacing}px) translateZ(-200px) rotateY(${-offset * 30}deg) scale(0.85)`;
+                item.style.opacity = '0.8';
+                item.style.zIndex = '5';
+            } else if (abs === 2) {
+                item.style.transform = `translate(-50%, -50%) translateX(${offset * (spacing+80)}px) translateZ(-350px) rotateY(${-offset * 40}deg) scale(0.7)`;
+                item.style.opacity = '0.5';
+                item.style.zIndex = '3';
+            } else {
+                item.style.transform = 'translate(-50%, -50%) translateZ(-500px) scale(0.5)';
+                item.style.opacity = '0';
+                item.style.zIndex = '1';
             }
         });
         indicators.forEach((ind, i) => ind.classList.toggle('active', i === currentIndex));
@@ -585,16 +718,16 @@
     setInterval(nextSlide, 5000);
     window.addEventListener('resize', () => updateCarousel());
 
-    // SKILLS GRID + dynamic categories (berdasarkan skillsData)
+    // ========== SKILLS GRID ==========
     function initSkillsGrid() {
         const grid = document.getElementById('skillsGrid');
         const categoriesContainer = document.getElementById('dynamicCategories');
         const uniqueCats = ['all', ...new Set(skillsData.map(s => s.category))];
         categoriesContainer.innerHTML = '';
         uniqueCats.forEach(cat => {
-            const btn = document.createElement('div'); 
-            btn.className = 'category-tab'; 
-            btn.textContent = cat === 'all' ? 'All Skills' : (cat === 'design' ? 'Design' : 'Frontend'); 
+            const btn = document.createElement('div');
+            btn.className = 'category-tab';
+            btn.textContent = cat === 'all' ? 'All Skills' : (cat === 'design' ? 'Design' : 'Frontend');
             btn.dataset.category = cat;
             if (cat === 'all') btn.classList.add('active');
             btn.addEventListener('click', () => {
@@ -609,7 +742,7 @@
             grid.innerHTML = '';
             const filtered = category === 'all' ? skillsData : skillsData.filter(s => s.category === category);
             filtered.forEach(skill => {
-                const hex = document.createElement('div'); 
+                const hex = document.createElement('div');
                 hex.className = 'skill-hexagon';
                 hex.innerHTML = `
                     <div class="hexagon-inner">
@@ -628,7 +761,7 @@
         displaySkills('all');
     }
 
-    // Form handling + UI events
+    // ========== UI EVENTS ==========
     document.getElementById('contactForm').addEventListener('submit', (e) => {
         e.preventDefault();
         const form = e.target;
@@ -637,58 +770,62 @@
         form.reset();
     });
 
-    // Mobile menu, header scroll, active nav
+    // Mobile menu
     const menuToggle = document.getElementById('menuToggle');
     const navMenu = document.getElementById('navMenu');
-    menuToggle.addEventListener('click', () => { 
-        navMenu.classList.toggle('active'); 
-        menuToggle.classList.toggle('active'); 
+    menuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        menuToggle.classList.toggle('active');
     });
 
-    window.addEventListener('scroll', () => { 
-        document.getElementById('header').classList.toggle('scrolled', window.scrollY > 100); 
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+        document.getElementById('header').classList.toggle('scrolled', window.scrollY > 100);
     });
 
+    // Active nav update for all sections
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
-
     function updateActiveNav() {
         let scrollPos = window.scrollY + 150;
         sections.forEach(section => {
-            const top = section.offsetTop, 
-                  height = section.offsetHeight, 
+            const top = section.offsetTop,
+                  height = section.offsetHeight,
                   id = section.id;
             if (scrollPos >= top && scrollPos < top + height) {
-                navLinks.forEach(link => { 
-                    link.classList.remove('active'); 
-                    if(link.getAttribute('href') === `#${id}`) link.classList.add('active'); 
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${id}`) link.classList.add('active');
                 });
             }
         });
     }
 
     navLinks.forEach(link => link.addEventListener('click', function(e) {
-        e.preventDefault(); 
-        const targetId = this.getAttribute('href').substring(1); 
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
         const target = document.getElementById(targetId);
-        if(target) { 
-            window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' }); 
-            navMenu.classList.remove('active'); 
-            menuToggle.classList.remove('active'); 
+        if (target) {
+            window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' });
+            navMenu.classList.remove('active');
+            menuToggle.classList.remove('active');
         }
     }));
 
     window.addEventListener('scroll', updateActiveNav);
     updateActiveNav();
 
-    window.addEventListener('load', () => { 
-        setTimeout(() => { 
-            document.getElementById('loader').classList.add('hidden'); 
-        }, 1200); 
+    // Loading screen
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            document.getElementById('loader').classList.add('hidden');
+        }, 1200);
     });
 
+    // Init all dynamic components
     initCarousel();
     initSkillsGrid();
+    initCertificatesGrid();
 </script>
 </body>
 </html>
