@@ -249,7 +249,7 @@
         .full-image-overlay img { max-width:90%; max-height:90%; border:5px solid #fff; box-shadow: 0 0 0 5px #000, 12px 12px 0px rgba(0,0,0,0.8); background: #000; }
         .full-image-close { position: absolute; top:20px; right:30px; font-size:40px; color:#fff; cursor:pointer; background:#000; width:50px; height:50px; display:flex; align-items:center; justify-content:center; border:3px solid #fff; font-weight:900; }
 
-        /* Dark mode overrides */
+        /* ========== DARK MODE OVERRIDES ========== */
         body.dark-mode {
             --bg: #1a1a1a;
             --bg-alt: #222222;
@@ -269,6 +269,25 @@
         body.dark-mode .menu-toggle span { background: #fff; }
         body.dark-mode .dark-toggle { background: #2a2a2a; border-color: #fff; color: #fff; }
         body.dark-mode .dark-toggle:hover { background: var(--yellow-bright); color: #000; }
+
+        /* Mobile menu dark mode */
+        body.dark-mode .nav-menu {
+            background: #1a1a1a;
+            border-bottom-color: #fff;
+        }
+        body.dark-mode .nav-menu a {
+            color: #f0f0f0;
+            border-color: transparent;
+        }
+        body.dark-mode .nav-menu a:hover {
+            background: var(--yellow-bright);
+            color: #000;
+        }
+        body.dark-mode .nav-menu a.active {
+            background: #fff;
+            color: #000;
+        }
+
         body.dark-mode .hero { background: #1a1a1a; }
         body.dark-mode .hero-content h1 { color: #fff; text-shadow: 4px 4px 0px var(--yellow-bright); }
         body.dark-mode .hero-tagline { background: #2a2a2a; color: #fff; border-color: #fff; box-shadow: 5px 5px 0px #fff; }
@@ -330,7 +349,11 @@
         }
         @media (max-width: 768px) {
             .menu-toggle { display: flex; }
-            .nav-menu { position: fixed; left: -100%; top: 68px; flex-direction: column; background: #fff; width: 100%; text-align: center; padding: 24px 0; border-bottom: 4px solid #000; transition: 0.3s; gap: 2px; box-shadow: 0 8px 0px #000; z-index: 999; }
+            .nav-menu {
+                position: fixed; left: -100%; top: 68px; flex-direction: column; background: #fff;
+                width: 100%; text-align: center; padding: 24px 0; border-bottom: 4px solid #000;
+                transition: 0.3s; gap: 2px; box-shadow: 0 8px 0px #000; z-index: 999;
+            }
             .nav-menu.active { left: 0; }
             .nav-menu a { display: block; padding: 12px; font-size: 14px; }
             .hero-content h1 { font-size: 36px; }
