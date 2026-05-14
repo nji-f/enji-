@@ -25,6 +25,11 @@
             --shadow-md: 6px 6px 0px var(--shadow-light);
             --shadow-lg: 8px 8px 0px var(--shadow-light);
         }
+        
+        .footer-clock {
+    font-family: var(--font-display); font-size: 13px; font-weight: 700;
+    color: var(--yellow-bright); letter-spacing: 2px;
+}
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
@@ -385,6 +390,7 @@
         <h1>ENJI<span class="flux">NotDev</span></h1>
         <p class="hero-tagline"><span id="typed-text"></span><span class="cursor">|</span></p>
     </div>
+    <div class="footer-clock" id="liveClock">--:--:--</div>
 </section>
 
 <section class="about-section" id="about">
@@ -706,6 +712,14 @@
             darkToggle.textContent = '🌙';
         }
     });
+
+    function updateClock() {
+    const now = new Date();
+    const time = now.toLocaleTimeString('id-ID', { hour12: false });
+    document.getElementById('liveClock').textContent = time;
+}
+setInterval(updateClock, 1000);
+updateClock();
 
     // Typing effect
     const typedTextSpan = document.getElementById('typed-text');
