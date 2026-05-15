@@ -659,8 +659,8 @@ body.dark-mode .now-playing-widget .np-label {
     // Last.fm Now Playing
     const LASTFM_USERNAME = 'enjiaja';
     const PROXY_URL = 'https://lastfm-proxy.enjisecond559.workers.dev';
-  async function fetchNowPlaying() {
-    const npLabel = document.querySelector('.np-label'); // pilih labelnya
+async function fetchNowPlaying() {
+    const npLabel = document.querySelector('.np-label'); // ← wajib ada!
     const npTitle = document.getElementById('npTitle');
     const npArtist = document.getElementById('npArtist');
     const npProgress = document.getElementById('npProgress');
@@ -679,14 +679,13 @@ body.dark-mode .now-playing-widget .np-label {
                 npArtist.textContent = track.artist['#text'];
                 npProgress.style.width = Math.floor(Math.random() * 90 + 5) + '%';
             } else {
-                // LAST PLAYED → sembunyiin label
+                // LAST PLAYED → label ilang (sesuai permintaan lu)
                 if (npLabel) npLabel.style.display = 'none';
                 npTitle.textContent = '🎵 Last Played';
                 npArtist.textContent = `${track.name} - ${track.artist['#text']}`;
                 npProgress.style.width = '100%';
             }
         } else {
-            // NOT PLAYING → sembunyiin label juga
             if (npLabel) npLabel.style.display = 'none';
             npTitle.textContent = '🎵 Not Playing';
             npArtist.textContent = '—';
