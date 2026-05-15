@@ -669,17 +669,20 @@ async function fetchNowPlaying() {
         const response = await fetch(`${PROXY_URL}?username=${LASTFM_USERNAME}`);
         const data = await response.json();
         
-        if (data.recenttracks && data.recenttracks.track.length > 0) {
-            const track = data.recenttracks.track[0];
+        // Normalisasi: pastikan 'track' selalu array
+        let trackArray = data.recenttracks?.track || [];
+        if (!Array.isArray(trackArray)) trackArray = [trackArray];
+        
+        if (trackArray.length > 0) {
+            const track = trackArray[0]; // sekarang aman
             
             if (track['@attr'] && track['@attr'].nowplaying === 'true') {
-                // LAGI DIPUTAR → tampilin label
                 if (npLabel) npLabel.style.display = 'block';
                 npTitle.textContent = `🎵 ${track.name}`;
                 npArtist.textContent = track.artist['#text'];
+                // progress simulasi (tidak tersedia real)
                 npProgress.style.width = Math.floor(Math.random() * 90 + 5) + '%';
             } else {
-                // LAST PLAYED → sembunyiin label, tapi tetap pakai track yang sama
                 if (npLabel) npLabel.style.display = 'none';
                 npTitle.textContent = '🎵 Last Played';
                 npArtist.textContent = `${track.name} - ${track.artist['#text']}`;
