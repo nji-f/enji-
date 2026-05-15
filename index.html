@@ -669,12 +669,11 @@ async function fetchNowPlaying() {
         const response = await fetch(`${PROXY_URL}?username=${LASTFM_USERNAME}`);
         const data = await response.json();
         
-        // Normalisasi: pastikan 'track' selalu array
         let trackArray = data.recenttracks?.track || [];
         if (!Array.isArray(trackArray)) trackArray = [trackArray];
         
         if (trackArray.length > 0) {
-            const track = trackArray[0]; // sekarang aman
+            const track = trackArray[0];
             
             if (track['@attr'] && track['@attr'].nowplaying === 'true') {
                 if (npLabel) npLabel.style.display = 'block';
@@ -686,7 +685,15 @@ async function fetchNowPlaying() {
                 if (npLabel) npLabel.style.display = 'none';
                 npTitle.textContent = '🎵 Last Played';
                 npArtist.textContent = `${track.name} - ${track.artist['#text']}`;
-                npProgress.style.width = '100%';
+                // Di bagian Last Played, tambahin ini:
+                if (track.date && track.date.uts) {
+                    const elapsed = Math.floor(Date.now() / 1000) - parseInt(track.date.uts);
+                    const trackDuration = 240; // estimasi durasi 4 menit
+                    const percentage = Math.min(100, Math.floor((elapsed / trackDuration) * 100));
+                    npProgress.style.width = percentage + '%';
+                } else {
+                    npProgress.style.width = '100%';
+                }
             }
         } else {
             if (npLabel) npLabel.style.display = 'none';
