@@ -671,7 +671,6 @@ async function fetchNowPlaying() {
         
         if (data.recenttracks && data.recenttracks.track.length > 0) {
             const track = data.recenttracks.track[0];
-            const secondTrack = data.recenttracks.track[1]; // ambil track ke-2
             
             if (track['@attr'] && track['@attr'].nowplaying === 'true') {
                 // LAGI DIPUTAR → tampilin label
@@ -679,17 +678,12 @@ async function fetchNowPlaying() {
                 npTitle.textContent = `🎵 ${track.name}`;
                 npArtist.textContent = track.artist['#text'];
                 npProgress.style.width = Math.floor(Math.random() * 90 + 5) + '%';
-            } else if (secondTrack) {
-                // LAST PLAYED → label ilang, tapi ambil data dari track ke-2
+            } else {
+                // LAST PLAYED → sembunyiin label, tapi tetap pakai track yang sama
                 if (npLabel) npLabel.style.display = 'none';
                 npTitle.textContent = '🎵 Last Played';
-                npArtist.textContent = `${secondTrack.name} - ${secondTrack.artist['#text']}`;
+                npArtist.textContent = `${track.name} - ${track.artist['#text']}`;
                 npProgress.style.width = '100%';
-            } else {
-                if (npLabel) npLabel.style.display = 'none';
-                npTitle.textContent = '🎵 Not Playing';
-                npArtist.textContent = '—';
-                npProgress.style.width = '0%';
             }
         } else {
             if (npLabel) npLabel.style.display = 'none';
