@@ -659,35 +659,46 @@ body.dark-mode .now-playing-widget .np-label {
     // Last.fm Now Playing
     const LASTFM_USERNAME = 'enjiaja';
     const PROXY_URL = 'https://lastfm-proxy.enjisecond559.workers.dev';
-    async function fetchNowPlaying() {
-        const npTitle = document.getElementById('npTitle');
-        const npArtist = document.getElementById('npArtist');
-        const npProgress = document.getElementById('npProgress');
-        try {
-            const response = await fetch(`${PROXY_URL}?username=${LASTFM_USERNAME}`);
-            const data = await response.json();
-            if (data.recenttracks && data.recenttracks.track.length > 0) {
-                const track = data.recenttracks.track[0];
-                if (track['@attr'] && track['@attr'].nowplaying === 'true') {
-                    npTitle.textContent = `🎵 ${track.name}`;
-                    npArtist.textContent = track.artist['#text'];
-                    npProgress.style.width = Math.floor(Math.random() * 90 + 5) + '%';
-                } else {
-                    npTitle.textContent = '🎵 Last Played';
-                    npArtist.textContent = `${track.name} - ${track.artist['#text']}`;
-                    npProgress.style.width = '100%';
-                }
+  async function fetchNowPlaying() {
+    const npLabel = document.querySelector('.np-label'); // pilih labelnya
+    const npTitle = document.getElementById('npTitle');
+    const npArtist = document.getElementById('npArtist');
+    const npProgress = document.getElementById('npProgress');
+    
+    try {
+        const response = await fetch(`${PROXY_URL}?username=${LASTFM_USERNAME}`);
+        const data = await response.json();
+        
+        if (data.recenttracks && data.recenttracks.track.length > 0) {
+            const track = data.recenttracks.track[0];
+            
+            if (track['@attr'] && track['@attr'].nowplaying === 'true') {
+                // LAGI DIPUTAR → tampilin label
+                if (npLabel) npLabel.style.display = 'block';
+                npTitle.textContent = `🎵 ${track.name}`;
+                npArtist.textContent = track.artist['#text'];
+                npProgress.style.width = Math.floor(Math.random() * 90 + 5) + '%';
             } else {
-                npTitle.textContent = '🎵 Not Playing';
-                npArtist.textContent = '—';
-                npProgress.style.width = '0%';
+                // LAST PLAYED → sembunyiin label
+                if (npLabel) npLabel.style.display = 'none';
+                npTitle.textContent = '🎵 Last Played';
+                npArtist.textContent = `${track.name} - ${track.artist['#text']}`;
+                npProgress.style.width = '100%';
             }
-        } catch (error) {
+        } else {
+            // NOT PLAYING → sembunyiin label juga
+            if (npLabel) npLabel.style.display = 'none';
             npTitle.textContent = '🎵 Not Playing';
             npArtist.textContent = '—';
             npProgress.style.width = '0%';
         }
+    } catch (error) {
+        if (npLabel) npLabel.style.display = 'none';
+        npTitle.textContent = '🎵 Not Playing';
+        npArtist.textContent = '—';
+        npProgress.style.width = '0%';
     }
+}
     fetchNowPlaying();
     setInterval(fetchNowPlaying, 10000);
 
