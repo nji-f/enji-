@@ -660,7 +660,7 @@ body.dark-mode .now-playing-widget .np-label {
     const LASTFM_USERNAME = 'enjiaja';
     const PROXY_URL = 'https://lastfm-proxy.enjisecond559.workers.dev';
 async function fetchNowPlaying() {
-    const npLabel = document.querySelector('.np-label'); // ← wajib ada!
+    const npLabel = document.querySelector('.np-label');
     const npTitle = document.getElementById('npTitle');
     const npArtist = document.getElementById('npArtist');
     const npProgress = document.getElementById('npProgress');
@@ -671,6 +671,7 @@ async function fetchNowPlaying() {
         
         if (data.recenttracks && data.recenttracks.track.length > 0) {
             const track = data.recenttracks.track[0];
+            const secondTrack = data.recenttracks.track[1]; // ambil track ke-2
             
             if (track['@attr'] && track['@attr'].nowplaying === 'true') {
                 // LAGI DIPUTAR → tampilin label
@@ -678,12 +679,17 @@ async function fetchNowPlaying() {
                 npTitle.textContent = `🎵 ${track.name}`;
                 npArtist.textContent = track.artist['#text'];
                 npProgress.style.width = Math.floor(Math.random() * 90 + 5) + '%';
-            } else {
-                // LAST PLAYED → label ilang (sesuai permintaan lu)
+            } else if (secondTrack) {
+                // LAST PLAYED → label ilang, tapi ambil data dari track ke-2
                 if (npLabel) npLabel.style.display = 'none';
                 npTitle.textContent = '🎵 Last Played';
-                npArtist.textContent = `${track.name} - ${track.artist['#text']}`;
+                npArtist.textContent = `${secondTrack.name} - ${secondTrack.artist['#text']}`;
                 npProgress.style.width = '100%';
+            } else {
+                if (npLabel) npLabel.style.display = 'none';
+                npTitle.textContent = '🎵 Not Playing';
+                npArtist.textContent = '—';
+                npProgress.style.width = '0%';
             }
         } else {
             if (npLabel) npLabel.style.display = 'none';
